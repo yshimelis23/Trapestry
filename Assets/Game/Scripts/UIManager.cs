@@ -27,6 +27,22 @@ public class UIManager : MonoBehaviour
     private GameObject playModeEndPanel;
 
     [SerializeField]
+    private GameObject startInstructionPanel;
+    [SerializeField]
+    private GameObject pauseInstructionPanel;
+
+    [SerializeField]
+    private GameObject startExplanationPanel;
+    [SerializeField]
+    private GameObject endExplanationPanel;
+    [SerializeField]
+    private GameObject laserExplanationPanel;
+    [SerializeField]
+    private GameObject trapExplanationPanel;
+    [SerializeField]
+    private GameObject lavaExplanationPanel;
+
+    [SerializeField]
     private GameObject timerPanel; // contains label for timer
     [SerializeField]
     private Text timerLabel; // text on timer panel
@@ -35,7 +51,23 @@ public class UIManager : MonoBehaviour
     private GameObject placeModeInstructionPanel;
 
     [SerializeField]
-    private GameObject PauseMenu;
+    private FaceTracker canvasFaceTracker;
+    [SerializeField]
+    private Text lockButtonText;
+
+    public void ToggleLockMenu()
+    {
+        if (canvasFaceTracker.freeMove)
+        {
+            canvasFaceTracker.freeMove = false;
+            lockButtonText.text = "Unlock";
+        }
+        else
+        {
+            canvasFaceTracker.freeMove = true;
+            lockButtonText.text = "Lock";
+        }
+    }
 
     public void PlayModeUI()
     {
@@ -105,5 +137,25 @@ public class UIManager : MonoBehaviour
     public void WinScreen()
     {
         playModeEndPanel.SetActive(true);
+    }
+
+    public void ShowPauseScreen()
+    {
+        pauseInstructionPanel.SetActive(true);
+    }
+
+    public void HidePauseScreen()
+    {
+        pauseInstructionPanel.SetActive(false);
+    }
+
+    public void ShowStartScreen()
+    {
+        startInstructionPanel.SetActive(true);
+    }
+
+    public void HideStartScreen()
+    {
+        startInstructionPanel.SetActive(false);
     }
 }

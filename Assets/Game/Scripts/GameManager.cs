@@ -86,6 +86,7 @@ public class GameManager : MonoBehaviour
 
         UIManager.Instance.PlayModeUI();
         UIManager.Instance.GreyTimer();
+        UIManager.Instance.ShowStartScreen();
 
         isPlayMode = true;
         modeIndicator.material.color = Color.blue;
@@ -104,6 +105,8 @@ public class GameManager : MonoBehaviour
 
         UIManager.Instance.PlaceModeUI();
         UIManager.Instance.DisablePlayButton();
+        UIManager.Instance.HidePauseScreen();
+        UIManager.Instance.HideStartScreen();
 
         isPlayMode = false;
         modeIndicator.material.color = Color.magenta;
@@ -153,7 +156,10 @@ public class GameManager : MonoBehaviour
     {
         if(isWaitingToStart && isPlayMode)
         {
-            BeginPlay();
+            isWaitingToStart = false;
+            UIManager.Instance.WhiteTimer();
+            UIManager.Instance.HideStartScreen();
+            SelectionManager.Instance.DeselectAll();
         }
     }
     public void PlayerExitStartArea()
@@ -173,19 +179,12 @@ public class GameManager : MonoBehaviour
 
     }
 
-    //
-    public void BeginPlay()
-    {
-        isWaitingToStart = false;
-        UIManager.Instance.WhiteTimer();
-        SelectionManager.Instance.DeselectAll();
-    }
-
     public void GamePause()
     {
         if (isPlayMode)
         {
             isPaused = true;
+            UIManager.Instance.ShowPauseScreen();
             pauseIndicator.material.color = Color.red;
         }
     }
@@ -193,6 +192,7 @@ public class GameManager : MonoBehaviour
     public void GameResume()
     {
         isPaused = false;
+        UIManager.Instance.HidePauseScreen();
         pauseIndicator.material.color = Color.green;
     }
 
