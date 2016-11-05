@@ -76,6 +76,7 @@
     <Compile Include="Assets\Game\Scripts\GameManager.cs" />
     <Compile Include="Assets\Game\Scripts\ModalObject.cs" />
     <Compile Include="Assets\Game\Scripts\Objects\LazerObject.cs" />
+    <Compile Include="Assets\Game\Scripts\SpawnManager.cs" />
     <Compile Include="Assets\Game\Scripts\WallObject.cs" />
     <Compile Include="Assets\HoloToolkit-Examples\ColorPicker\GazeableColorPicker.cs" />
     <Compile Include="Assets\HoloToolkit-Examples\GazeRuler\Scripts\CWGestureManager.cs" />
