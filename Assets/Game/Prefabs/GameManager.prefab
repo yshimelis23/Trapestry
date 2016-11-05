@@ -1068,8 +1068,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6031a227466a9e44895b9b41ec6c3f24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startArea: {fileID: 0}
-  goalArea: {fileID: 0}
+  startArea: {fileID: 1000014097811160, guid: 97c45bc001680d94a85c716b46f40ce0, type: 2}
+  goalArea: {fileID: 1000011341314764, guid: b62da567aa15f9d4ba4ccc261aa3c800, type: 2}
   ListOfSpawnableObjects:
   - {fileID: 1000011934293036, guid: f40193729ebd8314c85a5eb65be49d93, type: 2}
 --- !u!114 &114000010819867782
@@ -1139,8 +1139,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 114000010810125864}
-        m_MethodName: SpawnObject
-        m_Mode: 3
+        m_MethodName: SpawnGoal
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
