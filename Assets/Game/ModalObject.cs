@@ -39,4 +39,22 @@ public class ModalObject : MonoBehaviour
     {
 
     }
+
+    // called when the player starts looking at this object
+    public virtual void GazeEnter()
+    {
+
+    }
+
+    // called when the player stops looking at this object
+    public virtual void GazeExit()
+    {
+
+    }
+
+    // called when the player clicks on the object
+    public virtual void Tap()
+    {
+
+    }
 }
