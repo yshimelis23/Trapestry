@@ -16,10 +16,6 @@ public class SurfaceTracker : MonoBehaviour
     Color ceiling = Color.blue;
     Color invalid = Color.red;
 
-    public LayerMask raycastLayers;
-
-    public float gazeDistance = 15f;
-
     // Use this for initialization
     void Start()
     {
@@ -37,7 +33,7 @@ public class SurfaceTracker : MonoBehaviour
         Vector3 gazeDir = Camera.main.transform.forward;
         RaycastHit info;
         // check player's line of sight for a wall
-        if (Physics.Raycast(new Ray(playerPos, gazeDir), out info, gazeDistance, raycastLayers, QueryTriggerInteraction.Ignore))
+        if (Physics.Raycast(playerPos, gazeDir, out info))
         {
             targetPosition = info.point;
             normal = info.normal;

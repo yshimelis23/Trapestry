@@ -1,14 +1,10 @@
 ﻿using UnityEngine;
-using System.Collections.Generic;
+using System.Collections;
 using System;
 
 public class ModalObject : MonoBehaviour
 {
     public Collider myCollider;
-
-
-    public Renderer[] myRenderers;
-    private List<Color> myColors;
 
     public enum PlacementState
     {
@@ -25,40 +21,16 @@ public class ModalObject : MonoBehaviour
                 // enable collider
                 myCollider.enabled = true;
                 // change color
-                SetColor(new Color(0, 0, 1, 0.5f));
+                GetComponent<Renderer>().material.color = new Color(0,0,1,0.5f);
                 break;
             case PlacementState.MOVING:
                 // disable collider
                 myCollider.enabled = false;
                 // change color
-                ResetColor();
+                GetComponent<Renderer>().material.color = new Color(1,1,1,1);
                 break;
         }
         mPlacementState = newState;
-    }
-
-    public void SetColor(Color c)
-    {
-        foreach (Renderer r in myRenderers)
-        {
-            if (r != null && r.material != null)
-            {
-                r.material.color = c;
-            }
-        }
-    }
-
-    public void ResetColor()
-    {
-        int i = 0;
-        foreach (Renderer r in myRenderers)
-        {
-            if (r != null && r.material != null)
-            {
-                r.material.color = myColors[i];
-            }
-            i++;
-        }
     }
 
     private bool _isPlayMode = false;
@@ -71,23 +43,6 @@ public class ModalObject : MonoBehaviour
         set
         {
             _isPlayMode = value;
-        }
-    }
-
-    // called when spawned
-    public virtual void Initialize()
-    {
-        myColors = new List<Color>();
-        foreach (Renderer r in myRenderers)
-        {
-            if (r != null && r.material != null)
-            {
-                myColors.Add(r.material.color);
-            }
-            else
-            {
-                myColors.Add(Color.white);
-            }
         }
     }
 
@@ -142,12 +97,10 @@ public class ModalObject : MonoBehaviour
     {
         currentMenu = Instantiate(propertyMenu);
         currentMenu.destroyObject += () => { Destroy(this.gameObject); };
-        currentMenu.moveObject += () =>
-        {
+        currentMenu.moveObject += () => {
             SpawnManager.Instance.StartPlacingObject(this);
         };
-        currentMenu.placeNewLookPoint += () =>
-        {
+        currentMenu.placeNewLookPoint += () => {
             SpawnManager.Instance.StartNode(this);
         };
 
@@ -161,10 +114,5 @@ public class ModalObject : MonoBehaviour
         {
             Destroy(currentMenu.gameObject);
         }
-    }
-
-    public virtual bool IsValidSurface(PlacementSurface surface)
-    {
-        return surface != PlacementSurface.Invalid;
     }
 }

@@ -34,8 +34,6 @@ public class SpawnManager : MonoBehaviour {
     public GameObject nodeCursorPrefab;
     private GameObject currentNodeCursor;
 
-    private float placeObjectStartTime;
-
     // Update is called once per frame
     void Update () {
         bool canPlaceHere = (surfaceTracker.mTargetSurface == PlacementSurface.Invalid) ? false : true;
@@ -43,14 +41,14 @@ public class SpawnManager : MonoBehaviour {
         if (objectToPlace != null)
         {
             objectToPlace.transform.position = surfaceTracker.targetPosition;
-            objectToPlace.transform.rotation = Quaternion.LookRotation(-surfaceTracker.normal);
-            objectToPlace.SetColor(canPlaceHere ? new Color(0,1,0,0.5f) : new Color(0, 1, 0, 0.5f));
+            objectToPlace.transform.rotation = Quaternion.LookRotation(surfaceTracker.normal);
+            objectToPlace.GetComponent<Renderer>().material.color = canPlaceHere ? Color.green : Color.red;
         }
 
         if(objectToGiveLookPoint != null)
         {
             currentNodeCursor.transform.position = surfaceTracker.targetPosition;
-            currentNodeCursor.transform.rotation = Quaternion.LookRotation(-surfaceTracker.normal);
+            currentNodeCursor.transform.rotation = Quaternion.LookRotation(surfaceTracker.normal);
             objectToGiveLookPoint.SetSecondNode(currentNodeCursor);
         }
     }
@@ -75,7 +73,7 @@ public class SpawnManager : MonoBehaviour {
         {
             Destroy(start.gameObject);
         }
-        ContainsTracker tracker = StartSpawningObject(startAreaPrefab).GetComponent<ContainsTracker>();
+        ContainsTracker tracker = StartSpawningObject(goalAreaPrefab).GetComponent<ContainsTracker>();
         tracker.SetAsStart();
         start = tracker;
     }
@@ -90,31 +88,22 @@ public class SpawnManager : MonoBehaviour {
     {
         //Right Now it spawns to right of the player.
         GameObject newObj = Instantiate(objectRef, surfaceTracker.targetPosition, Quaternion.identity) as GameObject;
-        newObj.GetComponent<ModalObject>().Initialize();
         StartPlacingObject(newObj.GetComponent<ModalObject>());
         return newObj;
     }
 
     public void StartPlacingObject(ModalObject obj)
     {
-        SelectionManager.Instance.DeselectAll();
         objectToPlace = obj;
         objectToPlace.SetState(ModalObject.PlacementState.MOVING);
-        placeObjectStartTime = Time.time;
+        objectToGiveLookPoint.Deselected();
     }
 
     public void ObjectPlaced()
     {
-        if (objectToPlace.IsValidSurface(surfaceTracker.mTargetSurface))
-        {
-            objectToPlace.SetState(ModalObject.PlacementState.PLACED);
-            SelectionManager.Instance.ObjectSelected(objectToPlace);
-            objectToPlace = null;
-        }
-        else
-        {
-            // play sound
-        }
+        objectToPlace.SetState(ModalObject.PlacementState.PLACED);
+        SelectionManager.Instance.ObjectSelected(objectToPlace);
+        objectToPlace = null;
     }
 
     public void StartNode(ModalObject obj)
@@ -132,7 +121,7 @@ public class SpawnManager : MonoBehaviour {
 
     public void Tap()
     {
-        if(objectToPlace != null && Time.time - placeObjectStartTime > 0.5f)
+        if(objectToPlace != null)
         {
             ObjectPlaced();
         }

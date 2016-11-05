@@ -17,7 +17,6 @@ public class SelectionManager : MonoBehaviour {
         _Instance = this;
     }
 
-    [HideInInspector]
     public ModalObject selectedObject;
 
     public void ObjectSelected(ModalObject newObject)
@@ -33,14 +32,5 @@ public class SelectionManager : MonoBehaviour {
 
             selectedObject.Selected();
         }
-    }
-
-    public void DeselectAll()
-    {
-        if (selectedObject)
-        {
-            selectedObject.Deselected();
-        }
-        selectedObject = null;
     }
 }
