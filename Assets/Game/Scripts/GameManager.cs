@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -21,6 +22,8 @@ public class GameManager : MonoBehaviour
     internal bool isPaused;
     internal bool isWaitingToStart;
 
+    private float playTimeElapsed;
+
     [SerializeField]
     private MeshRenderer modeIndicator;
     [SerializeField]
@@ -34,9 +37,14 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private GameObject placeModeInstructionPanel;
 
+    [SerializeField]
+    private GameObject timerPanel; // contains label for timer, set active in BeginPlay() 
+    private Text timerLabel; // text on timer panel, grabbed in Start()
+
     void Start()
     {
         SwitchToPlaceMode();
+        timerLabel = timerPanel.GetComponentInChildren<Text>();
     }
 
     public void KeywordReset()
@@ -85,6 +93,7 @@ public class GameManager : MonoBehaviour
         isWaitingToStart = true;
         isPaused = false;
         pauseIndicator.material.color = Color.yellow;
+        playTimeElapsed = 0;
 
         if (!isPlayMode)
         {
@@ -103,6 +112,8 @@ public class GameManager : MonoBehaviour
         placeModeInstructionPanel.SetActive(false);
         playModeEndPanel.SetActive(false);
         placeModePanel.SetActive(false);
+        timerPanel.SetActive(true);
+
 
         isPlayMode = true;
         modeIndicator.material.color = Color.blue;
@@ -145,6 +156,11 @@ public class GameManager : MonoBehaviour
                 {
                     obj.UpdateInPlayMode();
                 }
+                timerLabel.text = "Time: " + Mathf.Round(100.0f * playTimeElapsed)/100.0f;
+                if (!isWaitingToStart)
+                {
+                    playTimeElapsed += Time.deltaTime;
+                }
             }
             else
             {
@@ -168,6 +184,7 @@ public class GameManager : MonoBehaviour
     public void PlayerKilled()
     {
         playModeEndPanel.SetActive(true);
+
     }
 
     public void PlayerInStartArea()
@@ -186,11 +203,21 @@ public class GameManager : MonoBehaviour
     {
         if(!isWaitingToStart && isPlayMode)
         {
+            placeModeInstructionPanel.SetActive(true);
+            isPlayMode = false;
+            isWaitingToStart = true;
             playModeEndPanel.SetActive(true);
         }
     }
     public void PlayerExitEndArea()
     {
 
+    }
+
+    //
+    public void BeginPlay()
+    {
+        isWaitingToStart = false;
+        timerPanel.SetActive(true);
     }
 }
