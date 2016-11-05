@@ -236,6 +236,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 223000012660520972, guid: f07b849b9d73ba54699951e095aa5f53,
+        type: 2}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 901193072}
     - target: {fileID: 114000010810125864, guid: f07b849b9d73ba54699951e095aa5f53,
         type: 2}
       propertyPath: surfaceTracker
@@ -398,7 +403,8 @@ Prefab:
       propertyPath: m_RootOrder
       value: 7
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 135000012914810338, guid: b791bc658d1107a409ac9f4543fb9eef, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: b791bc658d1107a409ac9f4543fb9eef, type: 2}
   m_IsPrefabParent: 0
 --- !u!1001 &1609623278

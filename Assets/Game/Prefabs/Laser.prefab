@@ -341,7 +341,10 @@ MonoBehaviour:
   myCollider: {fileID: 65000011454651110}
   propertyMenu: {fileID: 114000012954324028, guid: e6ba74a020f4beb4a9634ece5b175bd2,
     type: 2}
+  SpatialSoundPrefab: {fileID: 1000011958795148, guid: cee155cba1dc7b045ab08570d3a2f163,
+    type: 2}
   mTip: {fileID: 1000011606194574}
+  LazerAudioSoundClip: {fileID: 0}
 --- !u!120 &120000010006253532
 LineRenderer:
   m_ObjectHideFlags: 1

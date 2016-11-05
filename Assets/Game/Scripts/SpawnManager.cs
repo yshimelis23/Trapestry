@@ -96,7 +96,7 @@ public class SpawnManager : MonoBehaviour {
     {
         objectToPlace = obj;
         objectToPlace.SetState(ModalObject.PlacementState.MOVING);
-        objectToGiveLookPoint.Deselected();
+        objectToPlace.Deselected();
     }
 
     public void ObjectPlaced()
