@@ -66,6 +66,15 @@ public class SpawnManager : MonoBehaviour {
         ContainsTracker tracker = StartSpawningObject(goalAreaPrefab).GetComponent<ContainsTracker>();
         tracker.SetAsGoal();
         goal = tracker;
+
+        if(goal != null && start != null)
+        {
+            UIManager.Instance.EnablePlayButton();
+        }
+        else
+        {
+            UIManager.Instance.DisablePlayButton();
+        }
     }
 
     public void SpawnStart()
@@ -77,6 +86,15 @@ public class SpawnManager : MonoBehaviour {
         ContainsTracker tracker = StartSpawningObject(startAreaPrefab).GetComponent<ContainsTracker>();
         tracker.SetAsStart();
         start = tracker;
+
+        if (goal != null && start != null)
+        {
+            UIManager.Instance.EnablePlayButton();
+        }
+        else
+        {
+            UIManager.Instance.DisablePlayButton();
+        }
     }
 
     //Spawn Objects in the ListoFSpawnable Objects. Pass in IndexNumber of the Object.

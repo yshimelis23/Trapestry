@@ -19,6 +19,9 @@ public class UIManager : MonoBehaviour
     }
 
     [SerializeField]
+    private Button playButton;
+
+    [SerializeField]
     private GameObject placeModePanel;
     [SerializeField]
     private GameObject playModeEndPanel;
@@ -75,6 +78,15 @@ public class UIManager : MonoBehaviour
         timerLabel.color = Color.white;
     }
 
+    public void DisablePlayButton()
+    {
+        playButton.interactable = false;
+    }
+
+    public void EnablePlayButton()
+    {
+        playButton.interactable = true;
+    }
 
     private IEnumerator PlaceModeInstructionRoutine()
     {

@@ -141,7 +141,7 @@ public class ModalObject : MonoBehaviour
     public virtual void Selected()
     {
         currentMenu = Instantiate(propertyMenu);
-        currentMenu.transform.position = this.transform.position + Vector3.up;
+        currentMenu.transform.position = this.transform.position;
         currentMenu.destroyObject += () => {
             Destroy(this.gameObject);
             SelectionManager.Instance.DeselectAll();

@@ -103,6 +103,7 @@ public class GameManager : MonoBehaviour
         }
 
         UIManager.Instance.PlaceModeUI();
+        UIManager.Instance.DisablePlayButton();
 
         isPlayMode = false;
         modeIndicator.material.color = Color.magenta;
@@ -177,6 +178,7 @@ public class GameManager : MonoBehaviour
     {
         isWaitingToStart = false;
         UIManager.Instance.WhiteTimer();
+        SelectionManager.Instance.DeselectAll();
     }
 
     public void GamePause()
