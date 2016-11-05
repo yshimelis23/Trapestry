@@ -5,6 +5,7 @@ public class PropertyMenu : MonoBehaviour
 {
     public event Action placeNewLookPoint;
     public event Action destroyObject;
+    public event Action moveObject;
 
     public void TriggerNewLookPoint()
     {
@@ -19,6 +20,14 @@ public class PropertyMenu : MonoBehaviour
         if (destroyObject != null)
         {
             destroyObject.Invoke();
+        }
+    }
+
+    public void TriggerMoveObject()
+    {
+        if (moveObject != null)
+        {
+            moveObject.Invoke();
         }
     }
 }

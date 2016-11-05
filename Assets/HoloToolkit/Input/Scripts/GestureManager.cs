@@ -449,6 +449,7 @@ namespace HoloToolkit.Unity
         /// </summary>
         private void OnTap()
         {
+            SpawnManager.Instance.Tap();
             if (FocusedObject != null)
             {
                 FocusedObject.SendMessage("OnSelect", SendMessageOptions.DontRequireReceiver);

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
-public class ContainsTracker : MonoBehaviour
+public class ContainsTracker : ModalObject
 {
     public event Action playerEnterCallback;
     public event Action playerExitCallback;

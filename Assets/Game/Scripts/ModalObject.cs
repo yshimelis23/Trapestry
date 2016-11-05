@@ -1,9 +1,39 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class ModalObject : MonoBehaviour
 {
-    private bool _isPlayMode;
+    public Collider myCollider;
+
+    public enum PlacementState
+    {
+        PLACED,
+        MOVING
+    }
+    private PlacementState mPlacementState = PlacementState.MOVING;
+
+    public void SetState(PlacementState newState)
+    {
+        switch (newState)
+        {
+            case PlacementState.PLACED:
+                // enable collider
+                myCollider.enabled = true;
+                // change color
+                GetComponent<Renderer>().material.color = new Color(0,0,1,0.5f);
+                break;
+            case PlacementState.MOVING:
+                // disable collider
+                myCollider.enabled = false;
+                // change color
+                GetComponent<Renderer>().material.color = new Color(1,1,1,1);
+                break;
+        }
+        mPlacementState = newState;
+    }
+
+    private bool _isPlayMode = false;
     public bool isPlayMode
     {
         get
@@ -46,19 +76,35 @@ public class ModalObject : MonoBehaviour
 
     }
 
+    // use the information in the node object to set up your look direction or floor area
+    public virtual void SetSecondNode(GameObject node)
+    {
+    }
+
+    public virtual void OnSelect()
+    {
+        if (!isPlayMode)
+        {
+            SelectionManager.Instance.ObjectSelected(this);
+        }
+    }
+
     public PropertyMenu propertyMenu;
     private PropertyMenu currentMenu;
-
-    public void OnSelect()
-    {
-        SelectionManager.Instance.ObjectSelected(this);
-    }
 
     // called when this object is selected
     public virtual void Selected()
     {
         currentMenu = Instantiate(propertyMenu);
         currentMenu.destroyObject += () => { Destroy(this.gameObject); };
+        currentMenu.moveObject += () => {
+            SpawnManager.Instance.StartPlacingObject(this);
+        };
+        currentMenu.placeNewLookPoint += () => {
+            SpawnManager.Instance.StartNode(this);
+        };
+
+
     }
 
     // called when this object is deselected
