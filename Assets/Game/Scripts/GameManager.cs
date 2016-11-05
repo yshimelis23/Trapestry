@@ -87,6 +87,7 @@ public class GameManager : MonoBehaviour
         UIManager.Instance.PlayModeUI();
         UIManager.Instance.GreyTimer();
         UIManager.Instance.ShowStartScreen();
+        UIManager.Instance.HideInstructions();
 
         isPlayMode = true;
         modeIndicator.material.color = Color.blue;
@@ -107,6 +108,7 @@ public class GameManager : MonoBehaviour
         UIManager.Instance.DisablePlayButton();
         UIManager.Instance.HidePauseScreen();
         UIManager.Instance.HideStartScreen();
+        UIManager.Instance.HideInstructions();
 
         isPlayMode = false;
         modeIndicator.material.color = Color.magenta;

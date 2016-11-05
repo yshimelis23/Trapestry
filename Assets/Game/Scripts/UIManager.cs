@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using System;
 
 public class UIManager : MonoBehaviour
 {
@@ -110,6 +111,7 @@ public class UIManager : MonoBehaviour
         timerLabel.color = Color.white;
     }
 
+
     public void DisablePlayButton()
     {
         playButton.interactable = false;
@@ -118,6 +120,40 @@ public class UIManager : MonoBehaviour
     public void EnablePlayButton()
     {
         playButton.interactable = true;
+    }
+
+    internal void LaserInstruction()
+    {
+        laserExplanationPanel.SetActive(false);
+    }
+
+    internal void LavaInstruction()
+    {
+        lavaExplanationPanel.SetActive(true);
+    }
+
+    internal void TrapInstruction()
+    {
+        trapExplanationPanel.SetActive(true);
+    }
+
+    internal void StartInstruction()
+    {
+        startExplanationPanel.SetActive(true);
+    }
+
+    internal void GoalInstruction()
+    {
+        endExplanationPanel.SetActive(true);
+    }
+
+    internal void HideInstructions()
+    {
+        startExplanationPanel.SetActive(false);
+        endExplanationPanel.SetActive(false);
+        laserExplanationPanel.SetActive(false);
+        lavaExplanationPanel.SetActive(false);
+        trapExplanationPanel.SetActive(false);
     }
 
     private IEnumerator PlaceModeInstructionRoutine()

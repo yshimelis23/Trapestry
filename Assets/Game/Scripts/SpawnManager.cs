@@ -67,6 +67,8 @@ public class SpawnManager : MonoBehaviour {
         tracker.SetAsGoal();
         goal = tracker;
 
+        UIManager.Instance.GoalInstruction();
+
         if(goal != null && start != null)
         {
             UIManager.Instance.EnablePlayButton();
@@ -87,6 +89,8 @@ public class SpawnManager : MonoBehaviour {
         tracker.SetAsStart();
         start = tracker;
 
+        UIManager.Instance.StartInstruction();
+
         if (goal != null && start != null)
         {
             UIManager.Instance.EnablePlayButton();
@@ -95,6 +99,24 @@ public class SpawnManager : MonoBehaviour {
         {
             UIManager.Instance.DisablePlayButton();
         }
+    }
+
+    public void SpawnLaser()
+    {
+        SpawnObject(0);
+        UIManager.Instance.LaserInstruction();
+    }
+
+    public void SpawnLava()
+    {
+        SpawnObject(1);
+        UIManager.Instance.LavaInstruction();
+    }
+
+    public void SpawnTrap()
+    {
+        SpawnObject(2);
+        UIManager.Instance.TrapInstruction();
     }
 
     //Spawn Objects in the ListoFSpawnable Objects. Pass in IndexNumber of the Object.
@@ -129,6 +151,7 @@ public class SpawnManager : MonoBehaviour {
             SelectionManager.Instance.ObjectSelected(objectToPlace);
             objectToPlace = null;
             UIManager.Instance.EnablePlacementMenu();
+            UIManager.Instance.HideInstructions();
         }
         else
         {
