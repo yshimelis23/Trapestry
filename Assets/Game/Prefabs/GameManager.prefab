@@ -318,6 +318,7 @@ GameObject:
   - 114: {fileID: 114000010939258594}
   - 114: {fileID: 114000013928478804}
   - 114: {fileID: 114000010810125864}
+  - 114: {fileID: 114000011087501364}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1157,6 +1158,18 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &114000011087501364
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012241513646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b35a84b09805364bae878b5d68ebaef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectedObject: {fileID: 0}
 --- !u!114 &114000011093568606
 MonoBehaviour:
   m_ObjectHideFlags: 1

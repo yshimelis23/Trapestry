@@ -42,7 +42,7 @@ public class SpawnManager : MonoBehaviour {
         {
             objectToPlace.transform.position = surfaceTracker.targetPosition;
             objectToPlace.transform.rotation = Quaternion.LookRotation(surfaceTracker.normal);
-            objectToPlace.GetComponent<Renderer>().material.color = canPlaceHere ? Color.green : Color.red;
+            objectToPlace.SetColor(canPlaceHere ? Color.green : Color.red);
         }
 
         if(objectToGiveLookPoint != null)
@@ -88,6 +88,7 @@ public class SpawnManager : MonoBehaviour {
     {
         //Right Now it spawns to right of the player.
         GameObject newObj = Instantiate(objectRef, surfaceTracker.targetPosition, Quaternion.identity) as GameObject;
+        newObj.GetComponent<ModalObject>().Initialize();
         StartPlacingObject(newObj.GetComponent<ModalObject>());
         return newObj;
     }

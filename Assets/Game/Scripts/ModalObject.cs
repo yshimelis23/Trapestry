@@ -1,10 +1,14 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 using System;
 
 public class ModalObject : MonoBehaviour
 {
     public Collider myCollider;
+
+
+    public Renderer[] myRenderers;
+    private List<Color> myColors;
 
     public enum PlacementState
     {
@@ -21,16 +25,34 @@ public class ModalObject : MonoBehaviour
                 // enable collider
                 myCollider.enabled = true;
                 // change color
-                GetComponent<Renderer>().material.color = new Color(0,0,1,0.5f);
+                SetColor(new Color(0, 0, 1, 0.5f));
                 break;
             case PlacementState.MOVING:
                 // disable collider
                 myCollider.enabled = false;
                 // change color
-                GetComponent<Renderer>().material.color = new Color(1,1,1,1);
+                ResetColor();
                 break;
         }
         mPlacementState = newState;
+    }
+
+    public void SetColor(Color c)
+    {
+        foreach (Renderer r in myRenderers)
+        {
+            r.material.color = c;
+        }
+    }
+
+    public void ResetColor()
+    {
+        int i = 0;
+        foreach (Renderer r in myRenderers)
+        {
+            r.material.color = myColors[i];
+            i++;
+        }
     }
 
     private bool _isPlayMode = false;
@@ -43,6 +65,16 @@ public class ModalObject : MonoBehaviour
         set
         {
             _isPlayMode = value;
+        }
+    }
+
+    // called when spawned
+    public virtual void Initialize()
+    {
+        myColors = new List<Color>();
+        foreach (Renderer r in myRenderers)
+        {
+            myColors.Add(r.material.color);
         }
     }
 

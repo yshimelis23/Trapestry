@@ -300,6 +300,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myCollider: {fileID: 136000010729457294}
+  myRenderers:
+  - {fileID: 23000011689823878}
+  - {fileID: 23000010731518916}
   propertyMenu: {fileID: 114000012954324028, guid: e6ba74a020f4beb4a9634ece5b175bd2,
     type: 2}
 --- !u!114 &114000012579282528

@@ -339,6 +339,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myCollider: {fileID: 65000011454651110}
+  myRenderers:
+  - {fileID: 23000010651720530}
+  - {fileID: 23000010473558652}
+  - {fileID: 23000011155105088}
   propertyMenu: {fileID: 114000012954324028, guid: e6ba74a020f4beb4a9634ece5b175bd2,
     type: 2}
   SpatialSoundPrefab: {fileID: 1000011958795148, guid: cee155cba1dc7b045ab08570d3a2f163,
