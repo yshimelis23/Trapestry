@@ -93,6 +93,7 @@ public class GameManager : MonoBehaviour
         isWaitingToStart = true;
         isPaused = false;
         pauseIndicator.material.color = Color.yellow;
+        playTimeElapsed = 0;
 
         if (!isPlayMode)
         {
