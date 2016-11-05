@@ -13,11 +13,8 @@ public class PlayerHeightAdjuster : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        float newheight = DoRayCastToGetHeight();
-        mCapsuleCollider.height = newheight;
-        Vector3 newCenter = mCapsuleCollider.center;
-        newCenter.y = -(newheight / 2);
-        mCapsuleCollider.center = newCenter;
+
+        UpdatePlayerHeight();
 	}
 
     float DoRayCastToGetHeight()
@@ -33,6 +30,16 @@ public class PlayerHeightAdjuster : MonoBehaviour {
         {
             return DefaultHeight;
         }
+    }
+
+    void UpdatePlayerHeight()
+    {
+        //Adjust the Height OF the Player's capsule
+        float newheight = DoRayCastToGetHeight();
+        mCapsuleCollider.height = newheight;
+        Vector3 newCenter = mCapsuleCollider.center;
+        newCenter.y = -(newheight / 2);
+        mCapsuleCollider.center = newCenter;
     }
 
 }
