@@ -56,6 +56,10 @@ public class GameManager : MonoBehaviour
         {
             ClearObjects();
         }
+        else
+        {
+            SwitchToPlaceMode();
+        }
     }
 
 

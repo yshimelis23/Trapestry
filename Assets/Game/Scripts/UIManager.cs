@@ -61,15 +61,19 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private Text lockButtonText;
 
+    private bool menuLocked;
+
     public void ToggleLockMenu()
     {
-        if (canvasFaceTracker.freeMove)
+        if (!menuLocked)
         {
+            menuLocked = true;
             canvasFaceTracker.freeMove = false;
             lockButtonText.text = "Unlock";
         }
         else
         {
+            menuLocked = false;
             canvasFaceTracker.freeMove = true;
             lockButtonText.text = "Lock";
         }

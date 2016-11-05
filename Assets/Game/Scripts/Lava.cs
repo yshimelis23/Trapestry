@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Lava : ModalObject {
+public class Lava : FloorObject {
 
     AudioSource mAudioSource;
 	// Use this for initialization

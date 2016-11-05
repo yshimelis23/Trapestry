@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class AxeTrap : ModalObject {
+public class AxeTrap : WallObject {
 
     public Animation mAnimation;
 
@@ -50,5 +50,18 @@ public class AxeTrap : ModalObject {
     {
         GameManager.Instance.PlayerKilled();
     }
+
+
+    public override void PlaceOnSurface(Vector3 position, Vector3 normal)
+    {
+        transform.position = position;
+        transform.rotation = Quaternion.identity;
+    }
+
+    public override bool IsValidSurface(PlacementSurface surface)
+    {
+        return surface == PlacementSurface.Ceiling || surface == PlacementSurface.Wall;
+    }
+
 
 }
