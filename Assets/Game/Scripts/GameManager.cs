@@ -186,7 +186,7 @@ public class GameManager : MonoBehaviour
     {
         if(!isWaitingToStart && isPlayMode)
         {
-            placeModeInstructionPanel.SetActive(true);
+            playModeEndPanel.SetActive(true);
         }
     }
     public void PlayerExitEndArea()

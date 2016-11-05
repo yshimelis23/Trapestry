@@ -30,7 +30,7 @@ public class SpawnManager : MonoBehaviour {
         {
             Destroy(start.gameObject);
         }
-        ContainsTracker tracker = SpawnArbitraryObject(goalArea).GetComponent<ContainsTracker>();
+        ContainsTracker tracker = SpawnArbitraryObject(startArea).GetComponent<ContainsTracker>();
         tracker.SetAsStart();
         start = tracker;
     }
@@ -44,6 +44,6 @@ public class SpawnManager : MonoBehaviour {
     private GameObject SpawnArbitraryObject(GameObject objectRef)
     {
         //Right Now it spawns to right of the player.
-        return Instantiate(objectRef, Camera.main.transform.position + new Vector3(2, 0, 0), Quaternion.identity) as GameObject;
+        return Instantiate(objectRef, Camera.main.transform.position + new Vector3(0, 0, 2), Quaternion.identity) as GameObject;
     }
 }
