@@ -52,9 +52,12 @@ public class LazerObject : ModalObject {
     // called every frame in play mode
     public override void UpdateInPlayMode()
     {
-        GetRayCastHit();
-        mLineRender.SetPosition(0, mTip.transform.position);
-        mLineRender.SetPosition(1, RayCastEndPoint);
+        GetRayCastHitPlayMode();
+        if (mLineRender)
+        {
+            mLineRender.SetPosition(0, mTip.transform.position);
+            mLineRender.SetPosition(1, RayCastEndPoint);
+        }
      mSSoundLazer.transform.position=(ClosestPointOnLine(mTip.transform.position,RayCastEndPoint,Camera.main.transform.position));
    
   
@@ -62,9 +65,12 @@ public class LazerObject : ModalObject {
 
     public override void UpdateInPlaceMode()
     {
-        GetRayCastHit();
-        mLineRender.SetPosition(0, mTip.transform.position);
-        mLineRender.SetPosition(1, RayCastEndPoint);
+        GetRayCastHitPlaceMode();
+        if (mLineRender)
+        {
+            mLineRender.SetPosition(0, mTip.transform.position);
+            mLineRender.SetPosition(1, RayCastEndPoint);
+        }
 
     }
     public void PlayerWasHitByLazer()
@@ -72,7 +78,7 @@ public class LazerObject : ModalObject {
         GameManager.Instance.PlayerKilled();
     }
 
-    public void GetRayCastHit()
+    public void GetRayCastHitPlayMode()
     {
         RaycastHit hit;
         Ray ForwardRay = new Ray(mTip.transform.position, mTip.transform.forward);
@@ -92,7 +98,21 @@ public class LazerObject : ModalObject {
     }
 
 
+    public void GetRayCastHitPlaceMode()
+    {
+        RaycastHit hit;
+        Ray ForwardRay = new Ray(mTip.transform.position, mTip.transform.forward);
+        if (Physics.Raycast(ForwardRay, out hit))
+        {
+            RayCastEndPoint = hit.point;
+          
 
+        }
+        else
+        {
+            RayCastEndPoint = mTip.transform.forward * 15;
+        }
+    }
 
 
     Vector3 ClosestPointOnLine( Vector3 vA, Vector3 vB,Vector3 vPoint)
