@@ -1097,7 +1097,7 @@ MonoBehaviour:
   modeIndicator: {fileID: 23000013023176666}
   pauseIndicator: {fileID: 23000011035199658}
   placeModePanel: {fileID: 1000010316377760}
-  playModeEndPanel: {fileID: 0}
+  playModeEndPanel: {fileID: 1000010272883198}
   placeModeInstructionPanel: {fileID: 1000013278390092}
 --- !u!114 &114000011067304112
 MonoBehaviour:
@@ -1139,8 +1139,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 114000010810125864}
-        m_MethodName: SpawnGoal
-        m_Mode: 1
+        m_MethodName: SpawnObject
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
