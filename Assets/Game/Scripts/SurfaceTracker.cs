@@ -44,17 +44,17 @@ public class SurfaceTracker : MonoBehaviour
             TestCursor.transform.position = targetPosition;
             TestCursor.GetComponent<Renderer>().material.color = wall;
             //check the normal of the surface and change color to show type
-            if (info.normal.z <= -.86f  || info.normal.x >= .86f || info.normal.x <= -.86f)
+            if (Mathf.Abs(Vector3.Dot(Vector3.up, info.normal)) < 0.5f)
             {
                 TestCursor.GetComponent<Renderer>().material.color = wall;
                 mTargetSurface = PlacementSurface.Wall;
             }
-            else if (info.normal.y <= -.86f)
+            else if (Vector3.Dot(Vector3.up, info.normal) > 0)
             {
                 TestCursor.GetComponent<Renderer>().material.color = ceiling;
                 mTargetSurface = PlacementSurface.Ceiling;
             }
-            else if (info.normal.y >= .86f)
+            else if (Vector3.Dot(Vector3.up, info.normal) < 0)
             {
                 TestCursor.GetComponent<Renderer>().material.color = floor;
                 mTargetSurface = PlacementSurface.Floor;
