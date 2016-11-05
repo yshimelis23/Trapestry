@@ -389,6 +389,7 @@ GameObject:
   - 114: {fileID: 114000013928478804}
   - 114: {fileID: 114000010810125864}
   - 114: {fileID: 114000011087501364}
+  - 114: {fileID: 114000010428037916}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -535,7 +536,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1000013496432060
 GameObject:
   m_ObjectHideFlags: 1
@@ -1083,6 +1084,22 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &114000010428037916
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000012241513646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a464aecd513d05c458c3dc4378b79fa6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  placeModePanel: {fileID: 1000010316377760}
+  playModeEndPanel: {fileID: 1000010272883198}
+  timerPanel: {fileID: 1000013278390092}
+  timerLabel: {fileID: 114000013918970476}
+  placeModeInstructionPanel: {fileID: 1000012467094384}
 --- !u!114 &114000010438831142
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1265,10 +1282,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   modeIndicator: {fileID: 23000013023176666}
   pauseIndicator: {fileID: 23000011035199658}
-  placeModePanel: {fileID: 1000010316377760}
-  playModeEndPanel: {fileID: 1000010272883198}
-  placeModeInstructionPanel: {fileID: 1000012467094384}
-  timerPanel: {fileID: 1000013278390092}
 --- !u!114 &114000011067304112
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1411,7 +1424,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.5, g: 0, b: 0, a: 0.392}
+  m_Color: {r: 0, g: 0.7103448, b: 1, a: 0.392}
   m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:

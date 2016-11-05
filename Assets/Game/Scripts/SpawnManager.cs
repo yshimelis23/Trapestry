@@ -42,8 +42,7 @@ public class SpawnManager : MonoBehaviour {
 
         if (objectToPlace != null)
         {
-            objectToPlace.transform.position = surfaceTracker.targetPosition;
-            objectToPlace.transform.rotation = Quaternion.LookRotation(surfaceTracker.normal);
+            objectToPlace.PlaceOnSurface(surfaceTracker.targetPosition, surfaceTracker.normal);
             objectToPlace.SetColor(canPlaceHere ? new Color(0,1,0,0.5f) : new Color(0, 1, 0, 0.5f));
         }
 
@@ -101,6 +100,7 @@ public class SpawnManager : MonoBehaviour {
         objectToPlace = obj;
         objectToPlace.SetState(ModalObject.PlacementState.MOVING);
         placeObjectStartTime = Time.time;
+
     }
 
     public void ObjectPlaced()

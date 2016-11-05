@@ -29,25 +29,9 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private MeshRenderer pauseIndicator;
 
-    [SerializeField]
-    private GameObject placeModePanel;
-    [SerializeField]
-    private GameObject playModeEndPanel;
-
-    [SerializeField]
-    private GameObject placeModeInstructionPanel;
-
-    [SerializeField]
-    private GameObject timerPanel; // contains label for timer, set active in BeginPlay() 
-    private Text timerLabel; // text on timer panel, grabbed in Start()
-
-    [SerializeField]
-    private GameObject PauseMenu;
-
     void Start()
     {
         SwitchToPlaceMode();
-        timerLabel = timerPanel.GetComponentInChildren<Text>();
     }
 
     public void KeywordReset()
@@ -85,7 +69,6 @@ public class GameManager : MonoBehaviour
         isPaused = false;
         pauseIndicator.material.color = Color.yellow;
         playTimeElapsed = 0;
-        timerLabel.color = Color.grey;
 
         if (!isPlayMode)
         {
@@ -101,11 +84,8 @@ public class GameManager : MonoBehaviour
             obj.ResetPlayMode();
         }
 
-        placeModeInstructionPanel.SetActive(false);
-        playModeEndPanel.SetActive(false);
-        placeModePanel.SetActive(false);
-        timerPanel.SetActive(true);
-
+        UIManager.Instance.PlayModeUI();
+        UIManager.Instance.GreyTimer();
 
         isPlayMode = true;
         modeIndicator.material.color = Color.blue;
@@ -122,9 +102,7 @@ public class GameManager : MonoBehaviour
             obj.isPlayMode = false;
         }
 
-        StartCoroutine(PlaceModeInstructionRoutine());
-        playModeEndPanel.SetActive(false);
-        placeModePanel.SetActive(true);
+        UIManager.Instance.PlaceModeUI();
 
         isPlayMode = false;
         modeIndicator.material.color = Color.magenta;
@@ -148,11 +126,11 @@ public class GameManager : MonoBehaviour
                 {
                     obj.UpdateInPlayMode();
                 }
-                timerLabel.text = "Time: " + Mathf.Round(100.0f * playTimeElapsed)/100.0f;
-                if (!isWaitingToStart)
+                if (!isWaitingToStart && !isPaused)
                 {
                     playTimeElapsed += Time.deltaTime;
                 }
+                UIManager.Instance.UpdateTimer("Time: " + Mathf.Round(100.0f * playTimeElapsed) / 100.0f);
             }
             else
             {
@@ -164,27 +142,17 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private IEnumerator PlaceModeInstructionRoutine()
-    {
-        placeModeInstructionPanel.SetActive(true);
-
-        yield return new WaitForSeconds(15);
-
-        placeModeInstructionPanel.SetActive(false);
-    }
 
     public void PlayerKilled()
     {
-        playModeEndPanel.SetActive(true);
-
+        UIManager.Instance.DeathScreen();
     }
 
     public void PlayerInStartArea()
     {
         if(isWaitingToStart && isPlayMode)
         {
-            isWaitingToStart = false;
-            timerLabel.color = Color.white;
+            BeginPlay();
         }
     }
     public void PlayerExitStartArea()
@@ -196,10 +164,7 @@ public class GameManager : MonoBehaviour
     {
         if(!isWaitingToStart && isPlayMode)
         {
-            placeModeInstructionPanel.SetActive(true);
-            isPlayMode = false;
-            isWaitingToStart = true;
-            playModeEndPanel.SetActive(true);
+            UIManager.Instance.WinScreen();
         }
     }
     public void PlayerExitEndArea()
@@ -211,7 +176,7 @@ public class GameManager : MonoBehaviour
     public void BeginPlay()
     {
         isWaitingToStart = false;
-        timerLabel.color = Color.white;
+        UIManager.Instance.WhiteTimer();
     }
 
     void GamePause()
