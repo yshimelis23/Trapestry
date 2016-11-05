@@ -12,6 +12,9 @@ public class LazerObject : ModalObject {
     GameObject mTip;
 
     [SerializeField]
+    Color ActiveLazerColor, PlaceModeLazerColor;
+
+    [SerializeField]
     AudioClip LazerAudioSoundClip;
 
     Vector3 RayCastEndPoint;
@@ -22,7 +25,7 @@ public class LazerObject : ModalObject {
 	void Start () {
 
         mLineRender = gameObject.GetComponent<LineRenderer>();
-        mLineRender.enabled = false;
+        mLineRender.enabled = true;
         mSSoundLazer = (GameObject)Instantiate(SpatialSoundPrefab);
         mSSoundLazer.GetComponent<AudioSource>().clip = LazerAudioSoundClip;
         mSSoundLazer.GetComponent<AudioSource>().loop = true;
@@ -38,13 +41,13 @@ public class LazerObject : ModalObject {
     // called once to construct anything you need for play mode
     public override void StartPlayMode()
     {
-        mLineRender.enabled = true;
+        mLineRender.SetColors(ActiveLazerColor, ActiveLazerColor);
         mSSoundLazer.GetComponent<AudioSource>().enabled = true;
     }
     public override void StartPlaceMode()
     {
         mSSoundLazer.GetComponent<AudioSource>().enabled = false;
-        mLineRender.enabled = false;
+        mLineRender.SetColors(PlaceModeLazerColor, PlaceModeLazerColor);
     }
     // called every frame in play mode
     public override void UpdateInPlayMode()
@@ -55,6 +58,14 @@ public class LazerObject : ModalObject {
      mSSoundLazer.transform.position=(ClosestPointOnLine(mTip.transform.position,RayCastEndPoint,Camera.main.transform.position));
    
   
+    }
+
+    public override void UpdateInPlaceMode()
+    {
+        GetRayCastHit();
+        mLineRender.SetPosition(0, mTip.transform.position);
+        mLineRender.SetPosition(1, RayCastEndPoint);
+
     }
     public void PlayerWasHitByLazer()
     {
