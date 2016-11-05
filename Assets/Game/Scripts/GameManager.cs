@@ -30,6 +30,9 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private GameObject playModePanel;
 
+    [SerializeField]
+    private GameObject placeModeInstructionPanel;
+
     void Start()
     {
         SwitchToPlaceMode();
@@ -95,6 +98,7 @@ public class GameManager : MonoBehaviour
             obj.ResetPlayMode();
         }
 
+        placeModeInstructionPanel.SetActive(false);
         playModePanel.SetActive(true);
         placeModePanel.SetActive(false);
 
@@ -113,6 +117,7 @@ public class GameManager : MonoBehaviour
             obj.isPlayMode = false;
         }
 
+        StartCoroutine(PlaceModeInstructionRoutine());
         playModePanel.SetActive(false);
         placeModePanel.SetActive(true);
 
@@ -147,5 +152,14 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
+    }
+
+    private IEnumerator PlaceModeInstructionRoutine()
+    {
+        placeModeInstructionPanel.SetActive(true);
+
+        yield return new WaitForSeconds(5);
+
+        placeModeInstructionPanel.SetActive(false);
     }
 }
