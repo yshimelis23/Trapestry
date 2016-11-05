@@ -204,6 +204,7 @@ public class GameManager : MonoBehaviour
             placeModeInstructionPanel.SetActive(true);
             isPlayMode = false;
             isWaitingToStart = true;
+            playModeEndPanel.SetActive(true);
         }
     }
     public void PlayerExitEndArea()
