@@ -74,6 +74,9 @@
   <ItemGroup>
     <Compile Include="Assets\Game\Scripts\FloorArea.cs" />
     <Compile Include="Assets\Game\Scripts\GameManager.cs" />
+    <Compile Include="Assets\Game\Scripts\GestureChild.cs" />
+    <Compile Include="Assets\Game\Scripts\GestureEnabledButton.cs" />
+    <Compile Include="Assets\Game\Scripts\GestureTest.cs" />
     <Compile Include="Assets\Game\Scripts\ModalObject.cs" />
     <Compile Include="Assets\Game\Scripts\Objects\LazerObject.cs" />
     <Compile Include="Assets\Game\Scripts\SpawnManager.cs" />
@@ -264,6 +267,7 @@
     <Compile Include="Assets\HoloToolkit\Utilities\Tests\Scripts\PlaneTargetGroup.cs" />
     <Compile Include="Assets\HoloToolkit\Utilities\Tests\Scripts\PlaneTargetGroupPicker.cs" />
     <Compile Include="Assets\HoloToolkit\Utilities\Tests\TextToSpeechManagerTest.cs" />
+    <Compile Include="Assets\PlayerHeightAdjuster.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\HoloToolkit\Input\Shaders\CursorShader.shader" />
