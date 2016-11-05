@@ -454,6 +454,10 @@ namespace HoloToolkit.Unity
             {
                 FocusedObject.SendMessage("OnSelect", SendMessageOptions.DontRequireReceiver);
             }
+            else
+            {
+                SelectionManager.Instance.DeselectAll();
+            }
         }
 
         /// <summary>

@@ -52,12 +52,12 @@ public class UIManager : MonoBehaviour
 
     public void EnablePlacementMenu()
     {
-        placeModePanel.SetActive(false);
+        placeModePanel.SetActive(true);
     }
 
     public void DisablePlacementMenu()
     {
-        placeModePanel.SetActive(true);
+        placeModePanel.SetActive(false);
     }
 
     public void UpdateTimer(string text)

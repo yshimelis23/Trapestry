@@ -100,7 +100,7 @@ public class SpawnManager : MonoBehaviour {
         objectToPlace = obj;
         objectToPlace.SetState(ModalObject.PlacementState.MOVING);
         placeObjectStartTime = Time.time;
-
+        UIManager.Instance.DisablePlacementMenu();
     }
 
     public void ObjectPlaced()
@@ -110,6 +110,7 @@ public class SpawnManager : MonoBehaviour {
             objectToPlace.SetState(ModalObject.PlacementState.PLACED);
             SelectionManager.Instance.ObjectSelected(objectToPlace);
             objectToPlace = null;
+            UIManager.Instance.EnablePlacementMenu();
         }
         else
         {
