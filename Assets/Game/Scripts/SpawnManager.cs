@@ -20,7 +20,6 @@ public class SpawnManager : MonoBehaviour {
         SpawnArbitraryObject(startArea);
     }
 
-
     //Spawn Objects in the ListoFSpawnable Objects. Pass in IndexNumber of the Object.
     public void SpawnObject(int IndexNumber)
     {
@@ -29,6 +28,7 @@ public class SpawnManager : MonoBehaviour {
 
     private void SpawnArbitraryObject(GameObject objectRef)
     {
-        Instantiate(objectRef, Camera.main.transform.position + new Vector3(2, 0, 0), Quaternion.identity);//Right Now it spawns to right of the player.
+        //Right Now it spawns to right of the player.
+        Instantiate(objectRef, Camera.main.transform.position + new Vector3(2, 0, 0), Quaternion.identity);
     }
 }
