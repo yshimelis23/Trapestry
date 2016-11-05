@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private GameObject placeModePanel;
     [SerializeField]
-    private GameObject playModePanel;
+    private GameObject playModeEndPanel;
 
     [SerializeField]
     private GameObject placeModeInstructionPanel;
@@ -99,7 +99,7 @@ public class GameManager : MonoBehaviour
         }
 
         placeModeInstructionPanel.SetActive(false);
-        playModePanel.SetActive(true);
+        playModeEndPanel.SetActive(false);
         placeModePanel.SetActive(false);
 
         isPlayMode = true;
@@ -118,7 +118,7 @@ public class GameManager : MonoBehaviour
         }
 
         StartCoroutine(PlaceModeInstructionRoutine());
-        playModePanel.SetActive(false);
+        playModeEndPanel.SetActive(false);
         placeModePanel.SetActive(true);
 
         isPlayMode = false;
@@ -165,6 +165,6 @@ public class GameManager : MonoBehaviour
 
     public void PlayerKilled()
     {
-
+        playModeEndPanel.SetActive(true);
     }
 }
