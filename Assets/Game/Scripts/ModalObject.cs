@@ -3,7 +3,31 @@ using System.Collections;
 
 public class ModalObject : MonoBehaviour
 {
-    private bool _isPlayMode;
+    public enum PlacementState
+    {
+        PLACED,
+        MOVING
+    }
+    private PlacementState mPlacementState = PlacementState.MOVING;
+
+    public void SetState(PlacementState newState)
+    {
+        switch (newState)
+        {
+            case PlacementState.PLACED:
+                // enable collider
+                // change color
+                GetComponent<Renderer>().material.color = new Color(0,0,1,0.5f);
+                break;
+            case PlacementState.MOVING:
+                // disable collider
+                // change color
+                GetComponent<Renderer>().material.color = new Color(1,1,1,1);
+                break;
+        }
+    }
+
+    private bool _isPlayMode = false;
     public bool isPlayMode
     {
         get
@@ -46,19 +70,29 @@ public class ModalObject : MonoBehaviour
 
     }
 
+
+    public virtual void OnSelect()
+    {
+        if (!isPlayMode)
+        {
+            SelectionManager.Instance.ObjectSelected(this);
+        }
+    }
+
     public PropertyMenu propertyMenu;
     private PropertyMenu currentMenu;
-
-    public void OnSelect()
-    {
-        SelectionManager.Instance.ObjectSelected(this);
-    }
 
     // called when this object is selected
     public virtual void Selected()
     {
         currentMenu = Instantiate(propertyMenu);
         currentMenu.destroyObject += () => { Destroy(this.gameObject); };
+        currentMenu.moveObject += () => {
+            SetState(PlacementState.MOVING);
+            SpawnManager.Instance.objectToPlace = this;
+        };
+
+
     }
 
     // called when this object is deselected

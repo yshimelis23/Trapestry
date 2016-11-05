@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
 
     internal bool isPlayMode;
     internal bool isPaused;
+    internal bool isWaitingToStart;
 
     [SerializeField]
     private MeshRenderer modeIndicator;
@@ -81,8 +82,9 @@ public class GameManager : MonoBehaviour
 
     public void StartPlayMode()
     {
+        isWaitingToStart = true;
         isPaused = false;
-        pauseIndicator.material.color = Color.green;
+        pauseIndicator.material.color = Color.yellow;
 
         if (!isPlayMode)
         {
@@ -165,9 +167,30 @@ public class GameManager : MonoBehaviour
 
     public void PlayerKilled()
     {
+        playModeEndPanel.SetActive(true);
+    }
 
-        print("NOW YOU DEAD MATE");
-       playModeEndPanel.SetActive(true);
+    public void PlayerInStartArea()
+    {
+        if(isWaitingToStart && isPlayMode)
+        {
+            isWaitingToStart = false;
+        }
+    }
+    public void PlayerExitStartArea()
+    {
+
+    }
+
+    public void PlayerInEndArea()
+    {
+        if(!isWaitingToStart && isPlayMode)
+        {
+            placeModeInstructionPanel.SetActive(true);
+        }
+    }
+    public void PlayerExitEndArea()
+    {
 
     }
 }
