@@ -41,6 +41,9 @@ public class GameManager : MonoBehaviour
     private GameObject timerPanel; // contains label for timer, set active in BeginPlay() 
     private Text timerLabel; // text on timer panel, grabbed in Start()
 
+    [SerializeField]
+    private GameObject PauseMenu;
+
     void Start()
     {
         SwitchToPlaceMode();
@@ -49,14 +52,7 @@ public class GameManager : MonoBehaviour
 
     public void KeywordReset()
     {
-        if (isPlayMode)
-        {
-            StartPlayMode();
-        }
-        else
-        {
-            SwitchToPlaceMode();
-        }
+        GameReset();
     }
 
     public void KeywordPlay()
@@ -66,11 +62,7 @@ public class GameManager : MonoBehaviour
 
     public void KeywordPause()
     {
-        if (isPlayMode)
-        {
-            isPaused = true;
-            pauseIndicator.material.color = Color.red;
-        }
+        GamePause();
     }
 
     public void KeywordClear()
@@ -84,8 +76,7 @@ public class GameManager : MonoBehaviour
 
     public void KeywordResume()
     {
-        isPaused = false;
-        pauseIndicator.material.color = Color.green;
+        GameResume();
     }
 
     public void StartPlayMode()
@@ -222,4 +213,32 @@ public class GameManager : MonoBehaviour
         isWaitingToStart = false;
         timerLabel.color = Color.white;
     }
+
+    void GamePause()
+    {
+        if (isPlayMode)
+        {
+            isPaused = true;
+            pauseIndicator.material.color = Color.red;
+        }
+    }
+
+    void GameResume()
+    {
+        isPaused = false;
+        pauseIndicator.material.color = Color.green;
+    }
+
+    void GameReset()
+    {
+        if (isPlayMode)
+        {
+            StartPlayMode();
+        }
+        else
+        {
+            SwitchToPlaceMode();
+        }
+    }
+
 }
