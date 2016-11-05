@@ -167,4 +167,10 @@ public class ModalObject : MonoBehaviour
     {
         return surface != PlacementSurface.Invalid;
     }
+
+    public virtual void PlaceOnSurface(Vector3 position, Vector3 normal)
+    {
+        transform.position = position;
+        transform.rotation = Quaternion.LookRotation(normal);
+    }
 }
