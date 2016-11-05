@@ -79,7 +79,7 @@ public class UIManager : MonoBehaviour
 
         yield return new WaitForSeconds(15);
 
-        placeModeInstructionPanel.SetActive(false);
+        //placeModeInstructionPanel.SetActive(false);
     }
 
     public void DeathScreen()

@@ -147,27 +147,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f07b849b9d73ba54699951e095aa5f53, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &485986127 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1000012241513646, guid: f07b849b9d73ba54699951e095aa5f53,
-    type: 2}
-  m_PrefabInternal: {fileID: 243474738}
---- !u!114 &485986128
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 485986127}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a464aecd513d05c458c3dc4378b79fa6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  placeModePanel: {fileID: 952332488}
-  playModeEndPanel: {fileID: 1932630473}
-  timerPanel: {fileID: 0}
-  timerLabel: {fileID: 0}
-  placeModeInstructionPanel: {fileID: 0}
 --- !u!1001 &901193071
 Prefab:
   m_ObjectHideFlags: 0
@@ -215,11 +194,6 @@ Camera:
   m_PrefabParentObject: {fileID: 20000011648629670, guid: 2e636e2dfe881f24aa9e468cc9f744c1,
     type: 2}
   m_PrefabInternal: {fileID: 901193071}
---- !u!1 &952332488 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1000010316377760, guid: f07b849b9d73ba54699951e095aa5f53,
-    type: 2}
-  m_PrefabInternal: {fileID: 243474738}
 --- !u!1 &961229818
 GameObject:
   m_ObjectHideFlags: 0
@@ -409,11 +383,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8a5061fef011fd04897228aae8f4d92b, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &1932630473 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1000010272883198, guid: f07b849b9d73ba54699951e095aa5f53,
-    type: 2}
-  m_PrefabInternal: {fileID: 243474738}
 --- !u!114 &1962953894 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114000010104832082, guid: b791bc658d1107a409ac9f4543fb9eef,
