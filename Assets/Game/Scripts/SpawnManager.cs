@@ -28,9 +28,14 @@ public class SpawnManager : MonoBehaviour {
 
     [HideInInspector]
     public ModalObject objectToPlace;
-	
-	// Update is called once per frame
-	void Update () {
+    [HideInInspector]
+    public ModalObject objectToGiveLookPoint;
+
+    public GameObject nodeCursorPrefab;
+    private GameObject currentNodeCursor;
+
+    // Update is called once per frame
+    void Update () {
         bool canPlaceHere = (surfaceTracker.mTargetSurface == PlacementSurface.Invalid) ? false : true;
 
         if (objectToPlace != null)
@@ -38,6 +43,13 @@ public class SpawnManager : MonoBehaviour {
             objectToPlace.transform.position = surfaceTracker.targetPosition;
             objectToPlace.transform.rotation = Quaternion.LookRotation(surfaceTracker.normal);
             objectToPlace.GetComponent<Renderer>().material.color = canPlaceHere ? Color.green : Color.red;
+        }
+
+        if(objectToGiveLookPoint != null)
+        {
+            currentNodeCursor.transform.position = surfaceTracker.targetPosition;
+            currentNodeCursor.transform.rotation = Quaternion.LookRotation(surfaceTracker.normal);
+            objectToGiveLookPoint.SetSecondNode(currentNodeCursor);
         }
     }
 
@@ -83,12 +95,36 @@ public class SpawnManager : MonoBehaviour {
     public void StartPlacingObject(ModalObject obj)
     {
         objectToPlace = obj;
+        objectToPlace.SetState(ModalObject.PlacementState.MOVING);
+        objectToGiveLookPoint.Deselected();
     }
 
     public void ObjectPlaced()
     {
         objectToPlace.SetState(ModalObject.PlacementState.PLACED);
+        SelectionManager.Instance.ObjectSelected(objectToPlace);
         objectToPlace = null;
+    }
+
+    public void StartNode(ModalObject obj)
+    {
+        objectToGiveLookPoint = obj;
+        objectToGiveLookPoint.Deselected();
+        currentNodeCursor = Instantiate(nodeCursorPrefab);
+    }
+
+    public void NodePlaced()
+    {
+        Destroy(currentNodeCursor);
+        objectToGiveLookPoint = null;
+    }
+
+    public void Tap()
+    {
+        if(objectToPlace != null)
+        {
+            ObjectPlaced();
+        }
     }
 
 }

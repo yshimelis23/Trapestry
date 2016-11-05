@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class ModalObject : MonoBehaviour
 {
@@ -70,6 +71,10 @@ public class ModalObject : MonoBehaviour
 
     }
 
+    // use the information in the node object to set up your look direction or floor area
+    public virtual void SetSecondNode(GameObject node)
+    {
+    }
 
     public virtual void OnSelect()
     {
@@ -88,8 +93,10 @@ public class ModalObject : MonoBehaviour
         currentMenu = Instantiate(propertyMenu);
         currentMenu.destroyObject += () => { Destroy(this.gameObject); };
         currentMenu.moveObject += () => {
-            SetState(PlacementState.MOVING);
-            SpawnManager.Instance.objectToPlace = this;
+            SpawnManager.Instance.StartPlacingObject(this);
+        };
+        currentMenu.placeNewLookPoint += () => {
+            SpawnManager.Instance.StartNode(this);
         };
 
 

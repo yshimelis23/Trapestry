@@ -1068,10 +1068,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6031a227466a9e44895b9b41ec6c3f24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startArea: {fileID: 1000014097811160, guid: 97c45bc001680d94a85c716b46f40ce0, type: 2}
-  goalArea: {fileID: 1000011341314764, guid: b62da567aa15f9d4ba4ccc261aa3c800, type: 2}
+  surfaceTracker: {fileID: 0}
+  startAreaPrefab: {fileID: 1000014097811160, guid: 97c45bc001680d94a85c716b46f40ce0,
+    type: 2}
+  goalAreaPrefab: {fileID: 1000011341314764, guid: b62da567aa15f9d4ba4ccc261aa3c800,
+    type: 2}
   ListOfSpawnableObjects:
   - {fileID: 1000011934293036, guid: f40193729ebd8314c85a5eb65be49d93, type: 2}
+  objectToPlace: {fileID: 0}
 --- !u!114 &114000010819867782
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1666,7 +1670,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   freeMove: 1
-  distanceFromFace: 3
+  distanceFromFace: 6
   lerpSpeed: 0.3
 --- !u!114 &114000013082539384
 MonoBehaviour:
