@@ -101,7 +101,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000011934293036}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 1.12}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
@@ -341,7 +341,10 @@ MonoBehaviour:
   myCollider: {fileID: 65000011454651110}
   propertyMenu: {fileID: 114000012954324028, guid: e6ba74a020f4beb4a9634ece5b175bd2,
     type: 2}
+  SpatialSoundPrefab: {fileID: 1000011958795148, guid: cee155cba1dc7b045ab08570d3a2f163,
+    type: 2}
   mTip: {fileID: 1000011606194574}
+  LazerAudioSoundClip: {fileID: 8300000, guid: b78e433762cbc6d4181f9c68df5d1ca7, type: 3}
 --- !u!120 &120000010006253532
 LineRenderer:
   m_ObjectHideFlags: 1

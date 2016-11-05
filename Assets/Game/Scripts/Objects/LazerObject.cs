@@ -25,7 +25,8 @@ public class LazerObject : ModalObject {
         mLineRender.enabled = false;
         mSSoundLazer = (GameObject)Instantiate(SpatialSoundPrefab);
         mSSoundLazer.GetComponent<AudioSource>().clip = LazerAudioSoundClip;
-        //ADD AUIDO TO POINT ON LINE
+        mSSoundLazer.GetComponent<AudioSource>().loop = true;
+        mSSoundLazer.transform.position = mTip.transform.position;
         
 	}
 	
@@ -38,11 +39,11 @@ public class LazerObject : ModalObject {
     public override void StartPlayMode()
     {
         mLineRender.enabled = true;
-        print("IM TURNING UP SO U BETTER GET THIS PARTY STARTED");
+        mSSoundLazer.GetComponent<AudioSource>().enabled = true;
     }
     public override void StartPlaceMode()
     {
-
+        mSSoundLazer.GetComponent<AudioSource>().enabled = false;
         mLineRender.enabled = false;
     }
     // called every frame in play mode
@@ -51,10 +52,10 @@ public class LazerObject : ModalObject {
         GetRayCastHit();
         mLineRender.SetPosition(0, mTip.transform.position);
         mLineRender.SetPosition(1, RayCastEndPoint);
-
+     mSSoundLazer.transform.position=(ClosestPointOnLine(mTip.transform.position,RayCastEndPoint,Camera.main.transform.position));
+   
   
     }
-
 
     public void GetRayCastHit()
     {
@@ -76,20 +77,25 @@ public class LazerObject : ModalObject {
     }
 
 
-    Vector3 GetClosetPoint(Vector3 Dir, Vector3 P, bool segmentClamp)
+    Vector3 ClosestPointOnLine( Vector3 vA, Vector3 vB,Vector3 vPoint)
     {
-        Vector3 AP = P -gameObject.transform.position;
-    Vector3 AB = Dir;
-        float ab2 = AB.x * AB.x + AB.y * AB.y;
-        float ap_ab = AP.x * AB.x + AP.y * AB.y;
-        float t = ap_ab / ab2;
-        if (segmentClamp)
-        {
-            if (t < 0.0f) t = 0.0f;
-            else if (t > 1.0f) t = 1.0f;
-        }
-        Vector3 Closest = gameObject.transform.position + AB * t;
-        return Closest;
+        Vector3 vVector1 = vPoint - vA;
+        Vector3 vVector2 = (vB - vA).normalized;
+
+        float d = Vector3.Distance(vA, vB);
+        float t = Vector3.Dot(vVector2, vVector1);
+
+        if (t <= 0)
+            return vA;
+
+        if (t >= d)
+            return vB;
+
+        Vector3 vVector3 = vVector2 * t;
+
+        Vector3 vClosestPoint = vA + vVector3;
+
+        return vClosestPoint;
     }
 
 }
