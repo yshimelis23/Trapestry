@@ -158,7 +158,7 @@ public class GameManager : MonoBehaviour
     {
         placeModeInstructionPanel.SetActive(true);
 
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(15);
 
         placeModeInstructionPanel.SetActive(false);
     }
