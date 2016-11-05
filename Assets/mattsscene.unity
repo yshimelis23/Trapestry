@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44692492, g: 0.4967869, b: 0.57508546, a: 1}
+  m_IndirectSpecularColor: {r: 0.44692558, g: 0.49678743, b: 0.57508624, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -204,6 +204,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114000010810125864, guid: f07b849b9d73ba54699951e095aa5f53,
+        type: 2}
+      propertyPath: ListOfSpawnableObjects.Array.size
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4000013274267468, guid: f07b849b9d73ba54699951e095aa5f53, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -246,6 +251,12 @@ Prefab:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 901193072}
+    - target: {fileID: 114000010810125864, guid: f07b849b9d73ba54699951e095aa5f53,
+        type: 2}
+      propertyPath: ListOfSpawnableObjects.Array.data[1]
+      value: 
+      objectReference: {fileID: 1000013996115278, guid: 9c1432aa21b9290439e4d421292f92ae,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f07b849b9d73ba54699951e095aa5f53, type: 2}
   m_IsPrefabParent: 0
@@ -258,11 +269,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4000011436972832, guid: 2e636e2dfe881f24aa9e468cc9f744c1, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.121
       objectReference: {fileID: 0}
     - target: {fileID: 4000011436972832, guid: 2e636e2dfe881f24aa9e468cc9f744c1, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.38
       objectReference: {fileID: 0}
     - target: {fileID: 4000011436972832, guid: 2e636e2dfe881f24aa9e468cc9f744c1, type: 2}
       propertyPath: m_LocalPosition.z
@@ -400,6 +411,53 @@ Prefab:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b791bc658d1107a409ac9f4543fb9eef, type: 2}
+  m_IsPrefabParent: 0
+--- !u!1001 &1312797370
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4000012011891140, guid: 9c1432aa21b9290439e4d421292f92ae, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 1.0202
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000012011891140, guid: 9c1432aa21b9290439e4d421292f92ae, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0.177
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000012011891140, guid: 9c1432aa21b9290439e4d421292f92ae, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0.3137
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000012011891140, guid: 9c1432aa21b9290439e4d421292f92ae, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000012011891140, guid: 9c1432aa21b9290439e4d421292f92ae, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000012011891140, guid: 9c1432aa21b9290439e4d421292f92ae, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000012011891140, guid: 9c1432aa21b9290439e4d421292f92ae, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000012011891140, guid: 9c1432aa21b9290439e4d421292f92ae, type: 2}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 82000013315013438, guid: 9c1432aa21b9290439e4d421292f92ae,
+        type: 2}
+      propertyPath: m_Volume
+      value: 0.6
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 9c1432aa21b9290439e4d421292f92ae, type: 2}
   m_IsPrefabParent: 0
 --- !u!1001 &1609623278
 Prefab:

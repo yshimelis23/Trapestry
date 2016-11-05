@@ -56,6 +56,10 @@ public class LazerObject : ModalObject {
    
   
     }
+    public void PlayerWasHitByLazer()
+    {
+        GameManager.Instance.PlayerKilled();
+    }
 
     public void GetRayCastHit()
     {
@@ -66,7 +70,7 @@ public class LazerObject : ModalObject {
             RayCastEndPoint = hit.point;
          if(hit.collider.tag=="MainCamera")
             {
-                GameManager.Instance.PlayerKilled();
+                PlayerWasHitByLazer();
             }
 
         }
@@ -75,6 +79,9 @@ public class LazerObject : ModalObject {
             RayCastEndPoint = mTip.transform.forward * 15;
         }
     }
+
+
+
 
 
     Vector3 ClosestPointOnLine( Vector3 vA, Vector3 vB,Vector3 vPoint)

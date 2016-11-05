@@ -168,6 +168,7 @@ public class GameManager : MonoBehaviour
     public void PlayerKilled()
     {
         playModeEndPanel.SetActive(true);
+
     }
 
     public void PlayerInStartArea()
