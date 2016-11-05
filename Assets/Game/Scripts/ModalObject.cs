@@ -3,9 +3,30 @@ using System.Collections;
 
 public class ModalObject : MonoBehaviour
 {
-    enum PlacementState { PLACED, MOVING};
-    public SpawnManager mSpawnManager;//halfasdsed attempt at good code
+    public enum PlacementState
+    {
+        PLACED,
+        MOVING
+    }
     private PlacementState mPlacementState = PlacementState.MOVING;
+
+    public void SetState(PlacementState newState)
+    {
+        switch (newState)
+        {
+            case PlacementState.PLACED:
+                // enable collider
+                // change color
+                GetComponent<Renderer>().material.color = new Color(0,0,1,0.5f);
+                break;
+            case PlacementState.MOVING:
+                // disable collider
+                // change color
+                GetComponent<Renderer>().material.color = new Color(1,1,1,1);
+                break;
+        }
+    }
+
     private bool _isPlayMode = false;
     public bool isPlayMode
     {
@@ -49,36 +70,37 @@ public class ModalObject : MonoBehaviour
 
     }
 
+
     public virtual void OnSelect()
     {
         if (!isPlayMode)
         {
-            Debug.Log("Selected in Place Mode");
-            if (mPlacementState == PlacementState.MOVING && mSpawnManager.canPlaceHere && mSpawnManager.toBePlaced == this)
-            {
-                Debug.Log("Successful Object Placement");
-                mPlacementState = PlacementState.PLACED;
-                GetComponent<Renderer>().material.color = Color.blue;
-                mSpawnManager.ObjectPlaced();
-            }
-            else if (mPlacementState == PlacementState.PLACED)
-            {
-                // Enable Context Menu
-
-            }
+            SelectionManager.Instance.ObjectSelected(this);
         }
     }
-    
-    public void Select()
+
+    public PropertyMenu propertyMenu;
+    private PropertyMenu currentMenu;
+
+    // called when this object is selected
+    public virtual void Selected()
     {
+        currentMenu = Instantiate(propertyMenu);
+        currentMenu.destroyObject += () => { Destroy(this.gameObject); };
+        currentMenu.moveObject += () => {
+            SetState(PlacementState.MOVING);
+            SpawnManager.Instance.objectToPlace = this;
+        };
 
-        //Code for when the thing is selected
-        if (mSpawnManager.toBePlaced == null)
-        {
-            mPlacementState = PlacementState.MOVING;
-            mSpawnManager.toBePlaced = this;
-        }
+
     }
 
-
+    // called when this object is deselected
+    public virtual void Deselected()
+    {
+        if (currentMenu)
+        {
+            Destroy(currentMenu.gameObject);
+        }
+    }
 }

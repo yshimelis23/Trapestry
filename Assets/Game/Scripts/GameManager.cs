@@ -3,14 +3,14 @@ using System.Collections;
 
 public class GameManager : MonoBehaviour
 {
-    public GameManager Instance
+    public static GameManager Instance
     {
         get
         {
             return _Instance;
         }
     }
-    private GameManager _Instance;
+    private static GameManager _Instance;
 
     void Awake()
     {
@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
 
     internal bool isPlayMode;
     internal bool isPaused;
+    internal bool isWaitingToStart;
 
     [SerializeField]
     private MeshRenderer modeIndicator;
@@ -28,7 +29,10 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private GameObject placeModePanel;
     [SerializeField]
-    private GameObject playModePanel;
+    private GameObject playModeEndPanel;
+
+    [SerializeField]
+    private GameObject placeModeInstructionPanel;
 
     void Start()
     {
@@ -78,10 +82,11 @@ public class GameManager : MonoBehaviour
 
     public void StartPlayMode()
     {
+        isWaitingToStart = true;
         isPaused = false;
-        pauseIndicator.material.color = Color.green;
+        pauseIndicator.material.color = Color.yellow;
 
-        if (isPlayMode)
+        if (!isPlayMode)
         {
             foreach (ModalObject obj in GameObject.FindObjectsOfType<ModalObject>())
             {
@@ -95,7 +100,8 @@ public class GameManager : MonoBehaviour
             obj.ResetPlayMode();
         }
 
-        playModePanel.SetActive(true);
+        placeModeInstructionPanel.SetActive(false);
+        playModeEndPanel.SetActive(false);
         placeModePanel.SetActive(false);
 
         isPlayMode = true;
@@ -113,7 +119,8 @@ public class GameManager : MonoBehaviour
             obj.isPlayMode = false;
         }
 
-        playModePanel.SetActive(false);
+        StartCoroutine(PlaceModeInstructionRoutine());
+        playModeEndPanel.SetActive(false);
         placeModePanel.SetActive(true);
 
         isPlayMode = false;
@@ -147,5 +154,43 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
+    }
+
+    private IEnumerator PlaceModeInstructionRoutine()
+    {
+        placeModeInstructionPanel.SetActive(true);
+
+        yield return new WaitForSeconds(15);
+
+        placeModeInstructionPanel.SetActive(false);
+    }
+
+    public void PlayerKilled()
+    {
+        playModeEndPanel.SetActive(true);
+    }
+
+    public void PlayerInStartArea()
+    {
+        if(isWaitingToStart && isPlayMode)
+        {
+            isWaitingToStart = false;
+        }
+    }
+    public void PlayerExitStartArea()
+    {
+
+    }
+
+    public void PlayerInEndArea()
+    {
+        if(!isWaitingToStart && isPlayMode)
+        {
+            placeModeInstructionPanel.SetActive(true);
+        }
+    }
+    public void PlayerExitEndArea()
+    {
+
     }
 }

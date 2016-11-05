@@ -4,59 +4,91 @@ using System.Collections.Generic;
 
 public class SpawnManager : MonoBehaviour {
 
+    public static SpawnManager Instance
+    {
+        get
+        {
+            return _Instance;
+        }
+    }
+    private static SpawnManager _Instance;
+
+    void Awake()
+    {
+        _Instance = this;
+    }
+
+    public SurfaceTracker surfaceTracker;
+
+    public GameObject startAreaPrefab;
+    public GameObject goalAreaPrefab;
+
     //List of GameObjects that can be spawned
     public List<GameObject> ListOfSpawnableObjects;
-    public bool canPlaceHere;
-    public GameObject Laser;
-    public SurfaceTracker mSurfaceTracker;
-    public ModalObject toBePlaced;
-	// Use this for initialization
-	void Start () {
-	
-	}
+
+    [HideInInspector]
+    public ModalObject objectToPlace;
 	
 	// Update is called once per frame
 	void Update () {
-        canPlaceHere = (mSurfaceTracker.mTargetSurface == PlacementSurface.Invalid) ? false : true;
-        if (toBePlaced != null)
+        bool canPlaceHere = (surfaceTracker.mTargetSurface == PlacementSurface.Invalid) ? false : true;
+
+        if (objectToPlace != null)
         {
-            toBePlaced.transform.position = mSurfaceTracker.targetPosition;
-            toBePlaced.GetComponent<Renderer>().material.color = canPlaceHere ? Color.green : Color.red;
-        }
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            Debug.Log("Callign Onsleedect");
-            toBePlaced.OnSelect();
+            objectToPlace.transform.position = surfaceTracker.targetPosition;
+            objectToPlace.transform.rotation = Quaternion.LookRotation(surfaceTracker.normal);
+            objectToPlace.GetComponent<Renderer>().material.color = canPlaceHere ? Color.green : Color.red;
         }
     }
 
-    public void SpawnLazer()
+    private ContainsTracker start;
+    private ContainsTracker goal;
+
+    public void SpawnGoal()
     {
-        if (mSurfaceTracker.mTargetSurface != PlacementSurface.Invalid && toBePlaced == null)
+        if (goal != null)
         {
-            GameObject obj = Instantiate(Laser, mSurfaceTracker.targetPosition, Quaternion.LookRotation(mSurfaceTracker.normal)) as GameObject;
-            obj.GetComponent<Collider>().enabled = false;
-            toBePlaced = obj.GetComponent<ModalObject>();
-            toBePlaced.mSpawnManager = this;
+            Destroy(goal.gameObject);
         }
-        else if (toBePlaced != null)
-        {
-            Debug.Log("Finish Placing current object before making more");
-        }
+        ContainsTracker tracker = StartSpawningObject(goalAreaPrefab).GetComponent<ContainsTracker>();
+        tracker.SetAsGoal();
+        goal = tracker;
     }
 
+    public void SpawnStart()
+    {
+        if(start != null)
+        {
+            Destroy(start.gameObject);
+        }
+        ContainsTracker tracker = StartSpawningObject(goalAreaPrefab).GetComponent<ContainsTracker>();
+        tracker.SetAsStart();
+        start = tracker;
+    }
 
     //Spawn Objects in the ListoFSpawnable Objects. Pass in IndexNumber of the Object.
     private void SpawnObject(int IndexNumber)
     {
+        StartSpawningObject(ListOfSpawnableObjects[IndexNumber]).GetComponent<ModalObject>();
+    }
 
-        //Instantiate(ListOfSpawnableObjects[IndexNumber], Camera.main.transform.position + new Vector3(2, 0, 0), Quaternion.identity);//Right Now it spawns to right of the player.
-        Instantiate(ListOfSpawnableObjects[IndexNumber], mSurfaceTracker.targetPosition, Quaternion.identity);
+    private GameObject StartSpawningObject(GameObject objectRef)
+    {
+        //Right Now it spawns to right of the player.
+        GameObject newObj = Instantiate(objectRef, surfaceTracker.targetPosition, Quaternion.identity) as GameObject;
+        StartPlacingObject(newObj.GetComponent<ModalObject>());
+        return newObj;
+    }
+
+    public void StartPlacingObject(ModalObject obj)
+    {
+        objectToPlace = obj;
     }
 
     public void ObjectPlaced()
     {
-        toBePlaced = null;
+        objectToPlace.SetState(ModalObject.PlacementState.PLACED);
+        objectToPlace = null;
     }
 
 }
