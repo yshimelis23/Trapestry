@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
     internal bool isPlayMode;
     internal bool isPaused;
     internal bool isWaitingToStart;
+    internal bool isFinished;
 
     private float playTimeElapsed;
 
@@ -132,7 +133,7 @@ public class GameManager : MonoBehaviour
                 {
                     obj.UpdateInPlayMode();
                 }
-                if (!isWaitingToStart && !isPaused)
+                if (!isWaitingToStart && !isPaused && !isFinished)
                 {
                     playTimeElapsed += Time.deltaTime;
                 }
@@ -151,6 +152,7 @@ public class GameManager : MonoBehaviour
 
     public void PlayerKilled()
     {
+        isFinished = true;
         UIManager.Instance.DeathScreen();
     }
 
@@ -173,6 +175,7 @@ public class GameManager : MonoBehaviour
     {
         if(!isWaitingToStart && isPlayMode)
         {
+            isFinished = true;
             UIManager.Instance.WinScreen();
         }
     }

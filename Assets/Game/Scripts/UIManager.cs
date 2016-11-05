@@ -44,6 +44,11 @@ public class UIManager : MonoBehaviour
     private GameObject lavaExplanationPanel;
 
     [SerializeField]
+    private GameObject deathExplanationPanel;
+    [SerializeField]
+    private GameObject winExplanationPanel;
+
+    [SerializeField]
     private GameObject timerPanel; // contains label for timer
     [SerializeField]
     private Text timerLabel; // text on timer panel
@@ -76,6 +81,8 @@ public class UIManager : MonoBehaviour
         playModeEndPanel.SetActive(false);
         placeModePanel.SetActive(false);
         timerPanel.SetActive(true);
+        deathExplanationPanel.SetActive(false);
+        winExplanationPanel.SetActive(false);
     }
 
     public void PlaceModeUI()
@@ -84,6 +91,8 @@ public class UIManager : MonoBehaviour
         playModeEndPanel.SetActive(false);
         placeModePanel.SetActive(true);
         timerPanel.SetActive(false);
+        deathExplanationPanel.SetActive(false);
+        winExplanationPanel.SetActive(false);
     }
 
     public void EnablePlacementMenu()
@@ -168,11 +177,13 @@ public class UIManager : MonoBehaviour
     public void DeathScreen()
     {
         playModeEndPanel.SetActive(true);
+        deathExplanationPanel.SetActive(true);
     }
 
     public void WinScreen()
     {
         playModeEndPanel.SetActive(true);
+        winExplanationPanel.SetActive(true);
     }
 
     public void ShowPauseScreen()
