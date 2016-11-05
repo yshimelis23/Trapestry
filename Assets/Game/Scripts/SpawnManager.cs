@@ -10,14 +10,29 @@ public class SpawnManager : MonoBehaviour {
     //List of GameObjects that can be spawned
     public List<GameObject> ListOfSpawnableObjects;
 
+    private ContainsTracker start;
+    private ContainsTracker goal;
+
     public void SpawnGoal()
     {
-        SpawnArbitraryObject(goalArea);
+        if (goal != null)
+        {
+            Destroy(goal.gameObject);
+        }
+        ContainsTracker tracker = SpawnArbitraryObject(goalArea).GetComponent<ContainsTracker>();
+        tracker.SetAsGoal();
+        goal = tracker;
     }
 
     public void SpawnStart()
     {
-        SpawnArbitraryObject(startArea);
+        if(start != null)
+        {
+            Destroy(start.gameObject);
+        }
+        ContainsTracker tracker = SpawnArbitraryObject(goalArea).GetComponent<ContainsTracker>();
+        tracker.SetAsStart();
+        start = tracker;
     }
 
     //Spawn Objects in the ListoFSpawnable Objects. Pass in IndexNumber of the Object.
@@ -26,9 +41,9 @@ public class SpawnManager : MonoBehaviour {
         SpawnArbitraryObject(ListOfSpawnableObjects[IndexNumber]);
     }
 
-    private void SpawnArbitraryObject(GameObject objectRef)
+    private GameObject SpawnArbitraryObject(GameObject objectRef)
     {
         //Right Now it spawns to right of the player.
-        Instantiate(objectRef, Camera.main.transform.position + new Vector3(2, 0, 0), Quaternion.identity);
+        return Instantiate(objectRef, Camera.main.transform.position + new Vector3(2, 0, 0), Quaternion.identity) as GameObject;
     }
 }

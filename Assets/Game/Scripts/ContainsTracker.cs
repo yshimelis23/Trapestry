@@ -9,19 +9,30 @@ public class ContainsTracker : MonoBehaviour
     public event Action playerEnterCallback;
     public event Action playerExitCallback;
 
-    void OnTriggerEnter(Collider other)
+    public void OnTriggerEnter(Collider other)
     {
         if (other.tag == "MainCamera" && playerEnterCallback != null)
         {
             playerEnterCallback.Invoke();
         }
     }
-    void OnTriggerExit(Collider other)
+    public void OnTriggerExit(Collider other)
     {
         if (other.tag == "MainCamera" && playerExitCallback != null)
         {
             playerExitCallback.Invoke();
         }
+    }
+
+    public void SetAsStart()
+    {
+        playerEnterCallback += GameManager.Instance.PlayerInStartArea;
+        playerExitCallback += GameManager.Instance.PlayerExitStartArea;
+    }
+    public void SetAsGoal()
+    {
+        playerEnterCallback += GameManager.Instance.PlayerInEndArea;
+        playerExitCallback += GameManager.Instance.PlayerExitEndArea;
     }
 
 }
