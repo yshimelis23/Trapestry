@@ -4,12 +4,13 @@ using System.Collections;
 public class LazerObject : ModalObject {
 
     float rotation_speed;
+    float speedFactor;
 
 
 
 	// Use this for initialization
 	void Start () {
-	
+        speedFactor = 2;
 	}
 	
 	// Update is called once per frame
@@ -26,6 +27,6 @@ public class LazerObject : ModalObject {
     // called every frame in play mode
     public override void UpdateInPlayMode()
     {
-
+        gameObject.transform.Rotate(Vector3.up, rotation_speed * Time.deltaTime*speedFactor);
     }
 }
