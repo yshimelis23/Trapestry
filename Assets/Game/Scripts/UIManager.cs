@@ -133,7 +133,7 @@ public class UIManager : MonoBehaviour
 
     internal void LaserInstruction()
     {
-        laserExplanationPanel.SetActive(false);
+        laserExplanationPanel.SetActive(true);
     }
 
     internal void LavaInstruction()
