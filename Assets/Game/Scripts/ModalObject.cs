@@ -41,7 +41,10 @@ public class ModalObject : MonoBehaviour
     {
         foreach (Renderer r in myRenderers)
         {
-            r.material.color = c;
+            if (r != null && r.material != null)
+            {
+                r.material.color = c;
+            }
         }
     }
 
@@ -50,7 +53,10 @@ public class ModalObject : MonoBehaviour
         int i = 0;
         foreach (Renderer r in myRenderers)
         {
-            r.material.color = myColors[i];
+            if (r != null && r.material != null)
+            {
+                r.material.color = myColors[i];
+            }
             i++;
         }
     }
@@ -74,7 +80,14 @@ public class ModalObject : MonoBehaviour
         myColors = new List<Color>();
         foreach (Renderer r in myRenderers)
         {
-            myColors.Add(r.material.color);
+            if (r != null && r.material != null)
+            {
+                myColors.Add(r.material.color);
+            }
+            else
+            {
+                myColors.Add(Color.white);
+            }
         }
     }
 

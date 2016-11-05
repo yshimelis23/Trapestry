@@ -34,4 +34,13 @@ public class SelectionManager : MonoBehaviour {
             selectedObject.Selected();
         }
     }
+
+    public void DeselectAll()
+    {
+        if (selectedObject)
+        {
+            selectedObject.Deselected();
+        }
+        selectedObject = null;
+    }
 }

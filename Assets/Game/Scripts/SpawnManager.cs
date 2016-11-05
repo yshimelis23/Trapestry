@@ -43,14 +43,14 @@ public class SpawnManager : MonoBehaviour {
         if (objectToPlace != null)
         {
             objectToPlace.transform.position = surfaceTracker.targetPosition;
-            objectToPlace.transform.rotation = Quaternion.LookRotation(surfaceTracker.normal);
+            objectToPlace.transform.rotation = Quaternion.LookRotation(-surfaceTracker.normal);
             objectToPlace.SetColor(canPlaceHere ? new Color(0,1,0,0.5f) : new Color(0, 1, 0, 0.5f));
         }
 
         if(objectToGiveLookPoint != null)
         {
             currentNodeCursor.transform.position = surfaceTracker.targetPosition;
-            currentNodeCursor.transform.rotation = Quaternion.LookRotation(surfaceTracker.normal);
+            currentNodeCursor.transform.rotation = Quaternion.LookRotation(-surfaceTracker.normal);
             objectToGiveLookPoint.SetSecondNode(currentNodeCursor);
         }
     }
@@ -97,9 +97,9 @@ public class SpawnManager : MonoBehaviour {
 
     public void StartPlacingObject(ModalObject obj)
     {
+        SelectionManager.Instance.DeselectAll();
         objectToPlace = obj;
         objectToPlace.SetState(ModalObject.PlacementState.MOVING);
-        objectToPlace.Deselected();
         placeObjectStartTime = Time.time;
     }
 
