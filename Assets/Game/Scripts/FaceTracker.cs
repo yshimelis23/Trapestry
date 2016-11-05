@@ -3,6 +3,8 @@ using System.Collections;
 
 public class FaceTracker : MonoBehaviour
 {
+    public bool freeMove = true;
+
     public float distanceFromFace = 3f;
     public float lerpSpeed = 0.3f;
 
@@ -21,7 +23,10 @@ public class FaceTracker : MonoBehaviour
         }
 
         // lerp there
-        transform.position = Vector3.Lerp(transform.position, targetPos, Time.deltaTime / lerpSpeed);
+        if (freeMove)
+        {
+            transform.position = Vector3.Lerp(transform.position, targetPos, Time.deltaTime / lerpSpeed);
+        }
         transform.rotation = Quaternion.LookRotation(transform.position - pos, Vector3.up);
     }
 }

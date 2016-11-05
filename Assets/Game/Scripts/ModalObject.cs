@@ -46,4 +46,27 @@ public class ModalObject : MonoBehaviour
 
     }
 
+    public PropertyMenu propertyMenu;
+    private PropertyMenu currentMenu;
+
+    public void OnSelect()
+    {
+        SelectionManager.Instance.ObjectSelected(this);
+    }
+
+    // called when this object is selected
+    public virtual void Selected()
+    {
+        currentMenu = Instantiate(propertyMenu);
+        currentMenu.destroyObject += () => { Destroy(this.gameObject); };
+    }
+
+    // called when this object is deselected
+    public virtual void Deselected()
+    {
+        if (currentMenu)
+        {
+            Destroy(currentMenu.gameObject);
+        }
+    }
 }

@@ -102,3 +102,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a652856d738b6b84d80f7451150dd58c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  propertyMenu: {fileID: 114000012954324028, guid: e6ba74a020f4beb4a9634ece5b175bd2,
+    type: 2}

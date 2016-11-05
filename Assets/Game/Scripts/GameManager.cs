@@ -3,14 +3,14 @@ using System.Collections;
 
 public class GameManager : MonoBehaviour
 {
-    public GameManager Instance
+    public static GameManager Instance
     {
         get
         {
             return _Instance;
         }
     }
-    private GameManager _Instance;
+    private static GameManager _Instance;
 
     void Awake()
     {
@@ -161,5 +161,10 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(15);
 
         placeModeInstructionPanel.SetActive(false);
+    }
+
+    public void PlayerKilled()
+    {
+
     }
 }
