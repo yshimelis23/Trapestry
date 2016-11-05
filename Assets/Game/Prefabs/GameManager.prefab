@@ -1076,6 +1076,8 @@ MonoBehaviour:
   ListOfSpawnableObjects:
   - {fileID: 1000011934293036, guid: f40193729ebd8314c85a5eb65be49d93, type: 2}
   objectToPlace: {fileID: 0}
+  objectToGiveLookPoint: {fileID: 0}
+  nodeCursorPrefab: {fileID: 0}
 --- !u!114 &114000010819867782
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1670,7 +1672,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   freeMove: 1
-  distanceFromFace: 6
+  distanceFromFace: 3
   lerpSpeed: 0.3
 --- !u!114 &114000013082539384
 MonoBehaviour:

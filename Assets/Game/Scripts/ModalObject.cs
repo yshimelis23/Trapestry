@@ -4,6 +4,8 @@ using System;
 
 public class ModalObject : MonoBehaviour
 {
+    public Collider myCollider;
+
     public enum PlacementState
     {
         PLACED,
@@ -17,15 +19,18 @@ public class ModalObject : MonoBehaviour
         {
             case PlacementState.PLACED:
                 // enable collider
+                myCollider.enabled = true;
                 // change color
                 GetComponent<Renderer>().material.color = new Color(0,0,1,0.5f);
                 break;
             case PlacementState.MOVING:
                 // disable collider
+                myCollider.enabled = false;
                 // change color
                 GetComponent<Renderer>().material.color = new Color(1,1,1,1);
                 break;
         }
+        mPlacementState = newState;
     }
 
     private bool _isPlayMode = false;

@@ -299,6 +299,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13e6dc63724bbe04fbf29f4f4b70471e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myCollider: {fileID: 136000011062626948}
+  propertyMenu: {fileID: 114000012954324028, guid: e6ba74a020f4beb4a9634ece5b175bd2,
+    type: 2}
 --- !u!114 &114000014000650158
 MonoBehaviour:
   m_ObjectHideFlags: 1
