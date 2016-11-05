@@ -179,7 +179,7 @@ public class GameManager : MonoBehaviour
         UIManager.Instance.WhiteTimer();
     }
 
-    void GamePause()
+    public void GamePause()
     {
         if (isPlayMode)
         {
@@ -188,13 +188,13 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void GameResume()
+    public void GameResume()
     {
         isPaused = false;
         pauseIndicator.material.color = Color.green;
     }
 
-    void GameReset()
+    public void GameReset()
     {
         if (isPlayMode)
         {
