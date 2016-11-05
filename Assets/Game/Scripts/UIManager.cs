@@ -62,6 +62,16 @@ public class UIManager : MonoBehaviour
         timerLabel.text = text;
     }
 
+    public void GreyTimer()
+    {
+        timerLabel.color = Color.grey;
+    }
+
+    public void WhiteTimer()
+    {
+        timerLabel.color = Color.white;
+    }
+
 
     private IEnumerator PlaceModeInstructionRoutine()
     {

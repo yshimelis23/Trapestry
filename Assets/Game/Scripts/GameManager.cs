@@ -97,6 +97,7 @@ public class GameManager : MonoBehaviour
         }
 
         UIManager.Instance.PlayModeUI();
+        UIManager.Instance.GreyTimer();
 
         isPlayMode = true;
         modeIndicator.material.color = Color.blue;
@@ -163,7 +164,7 @@ public class GameManager : MonoBehaviour
     {
         if(isWaitingToStart && isPlayMode)
         {
-            isWaitingToStart = false;
+            BeginPlay();
         }
     }
     public void PlayerExitStartArea()
@@ -181,5 +182,12 @@ public class GameManager : MonoBehaviour
     public void PlayerExitEndArea()
     {
 
+    }
+
+    //
+    public void BeginPlay()
+    {
+        isWaitingToStart = false;
+        UIManager.Instance.WhiteTimer();
     }
 }
