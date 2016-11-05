@@ -34,6 +34,8 @@ public class SpawnManager : MonoBehaviour {
     public GameObject nodeCursorPrefab;
     private GameObject currentNodeCursor;
 
+    private float placeObjectStartTime;
+
     // Update is called once per frame
     void Update () {
         bool canPlaceHere = (surfaceTracker.mTargetSurface == PlacementSurface.Invalid) ? false : true;
@@ -42,7 +44,7 @@ public class SpawnManager : MonoBehaviour {
         {
             objectToPlace.transform.position = surfaceTracker.targetPosition;
             objectToPlace.transform.rotation = Quaternion.LookRotation(surfaceTracker.normal);
-            objectToPlace.SetColor(canPlaceHere ? Color.green : Color.red);
+            objectToPlace.SetColor(canPlaceHere ? new Color(0,1,0,0.5f) : new Color(0, 1, 0, 0.5f));
         }
 
         if(objectToGiveLookPoint != null)
@@ -98,13 +100,21 @@ public class SpawnManager : MonoBehaviour {
         objectToPlace = obj;
         objectToPlace.SetState(ModalObject.PlacementState.MOVING);
         objectToPlace.Deselected();
+        placeObjectStartTime = Time.time;
     }
 
     public void ObjectPlaced()
     {
-        objectToPlace.SetState(ModalObject.PlacementState.PLACED);
-        SelectionManager.Instance.ObjectSelected(objectToPlace);
-        objectToPlace = null;
+        if (objectToPlace.IsValidSurface(surfaceTracker.mTargetSurface))
+        {
+            objectToPlace.SetState(ModalObject.PlacementState.PLACED);
+            SelectionManager.Instance.ObjectSelected(objectToPlace);
+            objectToPlace = null;
+        }
+        else
+        {
+            // play sound
+        }
     }
 
     public void StartNode(ModalObject obj)
@@ -122,7 +132,7 @@ public class SpawnManager : MonoBehaviour {
 
     public void Tap()
     {
-        if(objectToPlace != null)
+        if(objectToPlace != null && Time.time - placeObjectStartTime > 0.5f)
         {
             ObjectPlaced();
         }

@@ -129,10 +129,12 @@ public class ModalObject : MonoBehaviour
     {
         currentMenu = Instantiate(propertyMenu);
         currentMenu.destroyObject += () => { Destroy(this.gameObject); };
-        currentMenu.moveObject += () => {
+        currentMenu.moveObject += () =>
+        {
             SpawnManager.Instance.StartPlacingObject(this);
         };
-        currentMenu.placeNewLookPoint += () => {
+        currentMenu.placeNewLookPoint += () =>
+        {
             SpawnManager.Instance.StartNode(this);
         };
 
@@ -146,5 +148,10 @@ public class ModalObject : MonoBehaviour
         {
             Destroy(currentMenu.gameObject);
         }
+    }
+
+    public virtual bool IsValidSurface(PlacementSurface surface)
+    {
+        return surface != PlacementSurface.Invalid;
     }
 }
