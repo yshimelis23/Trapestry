@@ -40,9 +40,10 @@ public class ModalObject : MonoBehaviour
 
     }
 
-    // called when the player clicks on the object
-    public virtual void Tap()
+    // called when the game switches back to place mode (not called at the beginning)
+    public virtual void StartPlaceMode()
     {
 
     }
+
 }

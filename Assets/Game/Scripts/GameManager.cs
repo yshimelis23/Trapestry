@@ -61,6 +61,15 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void KeywordClear()
+    {
+        if (!isPlayMode)
+        {
+            ClearObjects();
+        }
+    }
+
+
     public void KeywordResume()
     {
         isPaused = false;
@@ -100,7 +109,8 @@ public class GameManager : MonoBehaviour
 
         foreach (ModalObject obj in GameObject.FindObjectsOfType<ModalObject>())
         {
-            Destroy(obj.gameObject);
+            obj.StartPlaceMode();
+            obj.isPlayMode = false;
         }
 
         playModePanel.SetActive(false);
@@ -108,6 +118,14 @@ public class GameManager : MonoBehaviour
 
         isPlayMode = false;
         modeIndicator.material.color = Color.magenta;
+    }
+
+    public void ClearObjects()
+    {
+        foreach (ModalObject obj in GameObject.FindObjectsOfType<ModalObject>())
+        {
+            Destroy(obj.gameObject);
+        }
     }
 
     public void Update()
