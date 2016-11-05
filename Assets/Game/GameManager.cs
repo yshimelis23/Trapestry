@@ -19,7 +19,28 @@ public class GameManager : MonoBehaviour
 
     internal bool isPlayMode;
 
-	public void StartPlayMode()
+
+    public void KeywordReset()
+    {
+
+    }
+
+    public void KeywordPlay()
+    {
+
+    }
+
+    public void KeywordPause()
+    {
+
+    }
+
+    public void KeywordResume()
+    {
+
+    }
+
+    public void StartPlayMode()
     {
         if (isPlayMode)
         {
