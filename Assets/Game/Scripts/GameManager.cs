@@ -165,9 +165,6 @@ public class GameManager : MonoBehaviour
 
     public void PlayerKilled()
     {
-
-        print("NOW YOU DEAD MATE");
-       playModeEndPanel.SetActive(true);
-
+        playModeEndPanel.SetActive(true);
     }
 }
