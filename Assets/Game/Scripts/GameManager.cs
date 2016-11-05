@@ -18,30 +18,60 @@ public class GameManager : MonoBehaviour
     }
 
     internal bool isPlayMode;
+    internal bool isPaused;
 
+    [SerializeField]
+    private MeshRenderer modeIndicator;
+    [SerializeField]
+    private MeshRenderer pauseIndicator;
+
+    [SerializeField]
+    private GameObject placeModePanel;
+    [SerializeField]
+    private GameObject playModePanel;
+
+    void Start()
+    {
+        SwitchToPlaceMode();
+    }
 
     public void KeywordReset()
     {
-
+        if (isPlayMode)
+        {
+            StartPlayMode();
+        }
+        else
+        {
+            SwitchToPlaceMode();
+        }
     }
 
     public void KeywordPlay()
     {
-
+        StartPlayMode();
     }
 
     public void KeywordPause()
     {
-
+        if (isPlayMode)
+        {
+            isPaused = true;
+            pauseIndicator.material.color = Color.red;
+        }
     }
 
     public void KeywordResume()
     {
-
+        isPaused = false;
+        pauseIndicator.material.color = Color.green;
     }
 
     public void StartPlayMode()
     {
+        isPaused = false;
+        pauseIndicator.material.color = Color.green;
+
         if (isPlayMode)
         {
             foreach (ModalObject obj in GameObject.FindObjectsOfType<ModalObject>())
@@ -56,30 +86,47 @@ public class GameManager : MonoBehaviour
             obj.ResetPlayMode();
         }
 
+        playModePanel.SetActive(true);
+        placeModePanel.SetActive(false);
+
+        isPlayMode = true;
+        modeIndicator.material.color = Color.blue;
     }
 
     public void SwitchToPlaceMode()
     {
+        isPaused = false;
+        pauseIndicator.material.color = Color.green;
+
         foreach (ModalObject obj in GameObject.FindObjectsOfType<ModalObject>())
         {
             Destroy(obj.gameObject);
         }
+
+        playModePanel.SetActive(false);
+        placeModePanel.SetActive(true);
+
+        isPlayMode = false;
+        modeIndicator.material.color = Color.magenta;
     }
 
     public void Update()
     {
-        if (isPlayMode)
+        if (!isPaused)
         {
-            foreach (ModalObject obj in GameObject.FindObjectsOfType<ModalObject>())
+            if (isPlayMode)
             {
-                obj.UpdateInPlayMode();
+                foreach (ModalObject obj in GameObject.FindObjectsOfType<ModalObject>())
+                {
+                    obj.UpdateInPlayMode();
+                }
             }
-        }
-        else
-        {
-            foreach (ModalObject obj in GameObject.FindObjectsOfType<ModalObject>())
+            else
             {
-                obj.UpdateInPlaceMode();
+                foreach (ModalObject obj in GameObject.FindObjectsOfType<ModalObject>())
+                {
+                    obj.UpdateInPlaceMode();
+                }
             }
         }
     }
