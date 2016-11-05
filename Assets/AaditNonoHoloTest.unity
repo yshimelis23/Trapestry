@@ -329,6 +329,16 @@ Prefab:
       value: 
       objectReference: {fileID: 1000011934293036, guid: f40193729ebd8314c85a5eb65be49d93,
         type: 2}
+    - target: {fileID: 114000010939258594, guid: f07b849b9d73ba54699951e095aa5f53,
+        type: 2}
+      propertyPath: playModeEndPanel
+      value: 
+      objectReference: {fileID: 897055206}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f07b849b9d73ba54699951e095aa5f53, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &897055206 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1000010272883198, guid: f07b849b9d73ba54699951e095aa5f53,
+    type: 2}
+  m_PrefabInternal: {fileID: 486615554}

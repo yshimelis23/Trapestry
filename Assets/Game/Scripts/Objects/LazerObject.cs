@@ -56,7 +56,7 @@ public class LazerObject : ModalObject {
         if (Physics.Raycast(ForwardRay, out hit))
         {
             RayCastEndPoint = hit.point;
-         if(hit.collider.tag=="Main Camera")
+         if(hit.collider.tag=="MainCamera")
             {
                 GameManager.Instance.PlayerKilled();
             }

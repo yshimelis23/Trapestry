@@ -307,4 +307,4 @@ LineRenderer:
     m_EndColor:
       serializedVersion: 2
       rgba: 4294967295
-  m_UseWorldSpace: 0
+  m_UseWorldSpace: 1

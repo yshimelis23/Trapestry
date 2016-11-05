@@ -1071,7 +1071,7 @@ MonoBehaviour:
   startArea: {fileID: 0}
   goalArea: {fileID: 0}
   ListOfSpawnableObjects:
-  - {fileID: 1000011606194574, guid: f40193729ebd8314c85a5eb65be49d93, type: 2}
+  - {fileID: 1000011934293036, guid: f40193729ebd8314c85a5eb65be49d93, type: 2}
 --- !u!114 &114000010819867782
 MonoBehaviour:
   m_ObjectHideFlags: 1
