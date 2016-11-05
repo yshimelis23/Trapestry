@@ -3,7 +3,21 @@ using System.Collections;
 
 public class GameManager : MonoBehaviour
 {
-    public bool isPlayMode;
+    public GameManager Instance
+    {
+        get
+        {
+            return _Instance;
+        }
+    }
+    private GameManager _Instance;
+
+    void Awake()
+    {
+        _Instance = this;
+    }
+
+    internal bool isPlayMode;
 
 	public void StartPlayMode()
     {
