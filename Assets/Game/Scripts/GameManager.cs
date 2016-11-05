@@ -94,6 +94,7 @@ public class GameManager : MonoBehaviour
         isPaused = false;
         pauseIndicator.material.color = Color.yellow;
         playTimeElapsed = 0;
+        timerLabel.color = Color.grey;
 
         if (!isPlayMode)
         {
@@ -192,6 +193,7 @@ public class GameManager : MonoBehaviour
         if(isWaitingToStart && isPlayMode)
         {
             isWaitingToStart = false;
+            timerLabel.color = Color.white;
         }
     }
     public void PlayerExitStartArea()
@@ -218,6 +220,6 @@ public class GameManager : MonoBehaviour
     public void BeginPlay()
     {
         isWaitingToStart = false;
-        timerPanel.SetActive(true);
+        timerLabel.color = Color.white;
     }
 }
