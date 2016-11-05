@@ -84,7 +84,7 @@ public class GameManager : MonoBehaviour
         isPaused = false;
         pauseIndicator.material.color = Color.green;
 
-        if (isPlayMode)
+        if (!isPlayMode)
         {
             foreach (ModalObject obj in GameObject.FindObjectsOfType<ModalObject>())
             {
@@ -165,6 +165,6 @@ public class GameManager : MonoBehaviour
 
     public void PlayerKilled()
     {
-
+        print("NOW YOU DEAD MATE");
     }
 }

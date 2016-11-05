@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[RequireComponent(typeof(LineRenderer))]
 public class LazerObject : ModalObject {
 
     float rotation_speed;
@@ -9,6 +10,8 @@ public class LazerObject : ModalObject {
     LineRenderer mLineRender;
     [SerializeField]
     GameObject mTip;
+
+    Vector3 RayCastEndPoint;
 
 
 
@@ -28,6 +31,7 @@ public class LazerObject : ModalObject {
     public override void StartPlayMode()
     {
         mLineRender.enabled = true;
+        print("IM TURNING UP SO U BETTER GET THIS PARTY STARTED");
     }
     public override void StartPlaceMode()
     {
@@ -37,9 +41,9 @@ public class LazerObject : ModalObject {
     // called every frame in play mode
     public override void UpdateInPlayMode()
     {
-      
+        GetRayCastHit();
         mLineRender.SetPosition(0, mTip.transform.position);
-        mLineRender.SetPosition(1, mTip.transform.forward * 10);
+        mLineRender.SetPosition(1, RayCastEndPoint);
 
   
     }
@@ -47,6 +51,20 @@ public class LazerObject : ModalObject {
 
     public void GetRayCastHit()
     {
+        RaycastHit hit;
+        Ray ForwardRay = new Ray(mTip.transform.position, mTip.transform.forward);
+        if (Physics.Raycast(ForwardRay, out hit))
+        {
+            RayCastEndPoint = hit.point;
+         if(hit.collider.tag=="Main Camera")
+            {
+                GameManager.Instance.PlayerKilled();
+            }
 
+        }
+        else
+        {
+            RayCastEndPoint = mTip.transform.forward * 15;
+        }
     }
 }
