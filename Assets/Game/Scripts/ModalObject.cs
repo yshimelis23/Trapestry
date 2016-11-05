@@ -3,7 +3,10 @@ using System.Collections;
 
 public class ModalObject : MonoBehaviour
 {
-    private bool _isPlayMode;
+    enum PlacementState { PLACED, MOVING};
+    public SpawnManager mSpawnManager;//halfasdsed attempt at good code
+    private PlacementState mPlacementState = PlacementState.MOVING;
+    private bool _isPlayMode = false;
     public bool isPlayMode
     {
         get
@@ -45,5 +48,37 @@ public class ModalObject : MonoBehaviour
     {
 
     }
+
+    public virtual void OnSelect()
+    {
+        if (!isPlayMode)
+        {
+            Debug.Log("Selected in Place Mode");
+            if (mPlacementState == PlacementState.MOVING && mSpawnManager.canPlaceHere && mSpawnManager.toBePlaced == this)
+            {
+                Debug.Log("Successful Object Placement");
+                mPlacementState = PlacementState.PLACED;
+                GetComponent<Renderer>().material.color = Color.blue;
+                mSpawnManager.ObjectPlaced();
+            }
+            else if (mPlacementState == PlacementState.PLACED)
+            {
+                // Enable Context Menu
+
+            }
+        }
+    }
+    
+    public void Select()
+    {
+
+        //Code for when the thing is selected
+        if (mSpawnManager.toBePlaced == null)
+        {
+            mPlacementState = PlacementState.MOVING;
+            mSpawnManager.toBePlaced = this;
+        }
+    }
+
 
 }
