@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour
 {
@@ -29,6 +30,10 @@ public class GameManager : MonoBehaviour
     private MeshRenderer modeIndicator;
     [SerializeField]
     private MeshRenderer pauseIndicator;
+
+    public AudioClip placementSound;
+    public AudioClip winSound;
+    public AudioClip loseSound;
 
     void Start()
     {
@@ -156,11 +161,20 @@ public class GameManager : MonoBehaviour
 
     public void PlayerKilled()
     {
+
         if (!isWaitingToStart && !isPaused && isPlayMode && !isFinished)
         {
             isFinished = true;
             UIManager.Instance.DeathScreen();
+        AudioSource mAudio = GetComponent<AudioSource>();
+        if (mAudio != null)
+        {
+            mAudio.PlayOneShot(loseSound);
         }
+
+        isFinished = true;
+        UIManager.Instance.DeathScreen();
+
     }
 
     public void PlayerInStartArea()
@@ -184,6 +198,7 @@ public class GameManager : MonoBehaviour
         {
             isFinished = true;
             UIManager.Instance.WinScreen();
+            GetComponent<AudioSource>().PlayOneShot(loseSound);
         }
     }
     public void PlayerExitEndArea()
