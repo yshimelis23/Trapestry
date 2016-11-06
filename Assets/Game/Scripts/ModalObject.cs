@@ -4,6 +4,8 @@ using System;
 
 public class ModalObject : MonoBehaviour
 {
+    [SerializeField]
+    static AudioClip placementSound;
     public Collider myCollider;
 
 
@@ -26,6 +28,12 @@ public class ModalObject : MonoBehaviour
                 myCollider.enabled = true;
                 // change color
                 SetColor(new Color(0, 0, 1, 0.5f));
+                // play placement sound
+                AudioSource mAudio = GetComponent<AudioSource>();
+                if (mAudio != null)
+                {
+                    mAudio.PlayOneShot(GameManager.Instance.placementSound);
+                }
                 break;
             case PlacementState.MOVING:
                 // disable collider
