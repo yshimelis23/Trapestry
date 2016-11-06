@@ -42,7 +42,8 @@ public class GameManager : MonoBehaviour
 
     public void KeywordReset()
     {
-        GameReset();
+        SwitchToPlaceMode();
+        //GameReset();
     }
 
     public void KeywordPlay()
@@ -142,7 +143,7 @@ public class GameManager : MonoBehaviour
                 {
                     obj.UpdateInPlayMode();
                 }
-                if (!isWaitingToStart && !isPaused && !isFinished)
+                if (!isWaitingToStart && !isFinished)
                 {
                     playTimeElapsed += Time.deltaTime;
                 }
@@ -166,15 +167,12 @@ public class GameManager : MonoBehaviour
         {
             isFinished = true;
             UIManager.Instance.DeathScreen();
-        AudioSource mAudio = GetComponent<AudioSource>();
-        if (mAudio != null)
-        {
-            mAudio.PlayOneShot(loseSound);
+            AudioSource mAudio = GetComponent<AudioSource>();
+            if (mAudio != null)
+            {
+                mAudio.PlayOneShot(loseSound);
+            }
         }
-
-        isFinished = true;
-        UIManager.Instance.DeathScreen();
-
     }
 
     public void PlayerInStartArea()
@@ -211,6 +209,7 @@ public class GameManager : MonoBehaviour
         if (isPlayMode)
         {
             isPaused = true;
+            UIManager.Instance.HideStartScreen();
             UIManager.Instance.ShowPauseScreen();
             pauseIndicator.material.color = Color.red;
         }
@@ -219,6 +218,10 @@ public class GameManager : MonoBehaviour
     public void GameResume()
     {
         isPaused = false;
+        if (isWaitingToStart)
+        {
+            UIManager.Instance.ShowStartScreen();
+        }
         UIManager.Instance.HidePauseScreen();
         pauseIndicator.material.color = Color.green;
     }
