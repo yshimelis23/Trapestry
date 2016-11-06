@@ -156,8 +156,11 @@ public class GameManager : MonoBehaviour
 
     public void PlayerKilled()
     {
-        isFinished = true;
-        UIManager.Instance.DeathScreen();
+        if (!isWaitingToStart && !isPaused && isPlayMode && !isFinished)
+        {
+            isFinished = true;
+            UIManager.Instance.DeathScreen();
+        }
     }
 
     public void PlayerInStartArea()
