@@ -60,7 +60,7 @@ public class AxeTrap : WallObject {
 
     public override bool IsValidSurface(PlacementSurface surface)
     {
-        return surface == PlacementSurface.Ceiling || surface == PlacementSurface.Wall;
+        return surface == PlacementSurface.Floor || surface == PlacementSurface.Wall;
     }
 
 

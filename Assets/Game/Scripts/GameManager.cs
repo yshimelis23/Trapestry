@@ -78,6 +78,7 @@ public class GameManager : MonoBehaviour
     {
         isWaitingToStart = true;
         isPaused = false;
+        isFinished = false;
         pauseIndicator.material.color = Color.yellow;
         playTimeElapsed = 0;
 
@@ -116,7 +117,10 @@ public class GameManager : MonoBehaviour
         }
 
         UIManager.Instance.PlaceModeUI();
-        UIManager.Instance.DisablePlayButton();
+        if (!SpawnManager.Instance.ReadyToPlay())
+        {
+            UIManager.Instance.DisablePlayButton();
+        }
         UIManager.Instance.HidePauseScreen();
         UIManager.Instance.HideStartScreen();
         UIManager.Instance.HideInstructions();
@@ -192,7 +196,7 @@ public class GameManager : MonoBehaviour
 
     public void PlayerInEndArea()
     {
-        if(!isWaitingToStart && isPlayMode)
+        if(!isWaitingToStart && isPlayMode && !isFinished && !isPaused)
         {
             isFinished = true;
             UIManager.Instance.WinScreen();

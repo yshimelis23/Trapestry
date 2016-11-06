@@ -69,7 +69,7 @@ public class SpawnManager : MonoBehaviour {
 
         UIManager.Instance.GoalInstruction();
 
-        if(goal != null && start != null)
+        if (ReadyToPlay())
         {
             UIManager.Instance.EnablePlayButton();
         }
@@ -91,7 +91,7 @@ public class SpawnManager : MonoBehaviour {
 
         UIManager.Instance.StartInstruction();
 
-        if (goal != null && start != null)
+        if (ReadyToPlay())
         {
             UIManager.Instance.EnablePlayButton();
         }
@@ -99,6 +99,11 @@ public class SpawnManager : MonoBehaviour {
         {
             UIManager.Instance.DisablePlayButton();
         }
+    }
+
+    public bool ReadyToPlay()
+    {
+        return (goal != null && start != null);
     }
 
     public void SpawnLaser()

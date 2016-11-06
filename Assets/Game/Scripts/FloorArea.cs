@@ -38,7 +38,7 @@ public class FloorObject : ModalObject {
 
     public override bool IsValidSurface(PlacementSurface surface)
     {
-        return true;// surface == PlacementSurface.Floor || surface == PlacementSurface.Wall;
+        return surface == PlacementSurface.Ceiling || surface == PlacementSurface.Wall;
     }
 
 }
